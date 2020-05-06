@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<form method="POST">
+		<div>
+			<label>Titre</label>
+			<input type="text" name="pseudo">
+		</div>
+		<div>
+			<label>Description</label>
+			<input type="text" name="prenom">
+		</div>
+
+		<div>
+			<label>Categorie</label>
+			<input type="text" name="nom">
+		</div>
+		<div>
+			<label>image</label>
+			<input type="file" name="image">
+		</div>
+	</div>
+	<div>
+		<label>preparation</label>
+		<input type="text" name="preparation">
+	</div>
+	<div>
+		<label>Pack ingrédient?</label>
+		<input type="text" name="packingregients">
+	</div>
+
+
+	<button>Enregistrer</button>
+</form>{% endblock %}
