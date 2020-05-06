@@ -38,6 +38,16 @@ class Recettes
      */
     private $packingredients;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $preparation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +97,30 @@ class Recettes
     public function setPackingredients(?Packingredients $packingredients): self
     {
         $this->packingredients = $packingredients;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getPreparation(): ?string
+    {
+        return $this->preparation;
+    }
+
+    public function setPreparation(?string $preparation): self
+    {
+        $this->preparation = $preparation;
 
         return $this;
     }
