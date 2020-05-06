@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\PackingredientsRepository;
+use App\Repository\PackIngredientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PackingredientsRepository::class)
+ * @ORM\Entity(repositoryClass=PackIngredientRepository::class)
  */
-class Packingredients
+class PackIngredient
 {
     /**
      * @ORM\Id()
@@ -25,12 +25,12 @@ class Packingredients
     private $libelle;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float")
      */
     private $prix;
 
     /**
-     * @ORM\OneToMany(targetEntity=Recettes::class, mappedBy="packingredients", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Recette::class, mappedBy="pack_ingredient")
      */
     private $recettes;
 
@@ -56,12 +56,12 @@ class Packingredients
         return $this;
     }
 
-    public function getPrix(): ?int
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(?int $prix): self
+    public function setPrix(float $prix): self
     {
         $this->prix = $prix;
 
@@ -69,30 +69,30 @@ class Packingredients
     }
 
     /**
-     * @return Collection|Recettes[]
+     * @return Collection|Recette[]
      */
     public function getRecettes(): Collection
     {
         return $this->recettes;
     }
 
-    public function addRecette(Recettes $recette): self
+    public function addRecette(Recette $recette): self
     {
         if (!$this->recettes->contains($recette)) {
             $this->recettes[] = $recette;
-            $recette->setPackingredients($this);
+            $recette->setPackIngredient($this);
         }
 
         return $this;
     }
 
-    public function removeRecette(Recettes $recette): self
+    public function removeRecette(Recette $recette): self
     {
         if ($this->recettes->contains($recette)) {
             $this->recettes->removeElement($recette);
             // set the owning side to null (unless already changed)
-            if ($recette->getPackingredients() === $this) {
-                $recette->setPackingredients(null);
+            if ($recette->getPackIngredient() === $this) {
+                $recette->setPackIngredient(null);
             }
         }
 
