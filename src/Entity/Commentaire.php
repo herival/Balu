@@ -33,7 +33,7 @@ class Commentaire
     private $recette;
 
     /**
-     * @ORM\ManyToOne(targetEntity=membre::class, inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="commentaires")
      */
     private $membre;
 

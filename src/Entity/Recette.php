@@ -40,12 +40,12 @@ class Recette
     private $preparation;
 
     /**
-     * @ORM\ManyToOne(targetEntity=categorie::class, inversedBy="recettes")
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="recettes")
      */
     private $categorie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=packIngredient::class, inversedBy="recettes")
+     * @ORM\ManyToOne(targetEntity=PackIngredient::class, inversedBy="recettes")
      */
     private $pack_ingredient;
 
@@ -60,7 +60,7 @@ class Recette
     private $commandes;
 
     /**
-     * @ORM\ManyToOne(targetEntity=membre::class, inversedBy="recettes")
+     * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="recettes")
      */
     private $membre;
 
