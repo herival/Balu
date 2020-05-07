@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriesRepository;
+use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoriesRepository::class)
+ * @ORM\Entity(repositoryClass=CategorieRepository::class)
  */
-class Categories
+class Categorie
 {
     /**
      * @ORM\Id()
@@ -22,10 +22,10 @@ class Categories
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $categories;
+    private $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity=Recettes::class, mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity=Recette::class, mappedBy="categorie")
      */
     private $recettes;
 
@@ -39,27 +39,27 @@ class Categories
         return $this->id;
     }
 
-    public function getCategories(): ?string
+    public function getCategorie(): ?string
     {
-        return $this->categories;
+        return $this->categorie;
     }
 
-    public function setCategories(string $categories): self
+    public function setCategorie(string $categorie): self
     {
-        $this->categories = $categories;
+        $this->categorie = $categorie;
 
         return $this;
     }
 
     /**
-     * @return Collection|Recettes[]
+     * @return Collection|Recette[]
      */
     public function getRecettes(): Collection
     {
         return $this->recettes;
     }
 
-    public function addRecette(Recettes $recette): self
+    public function addRecette(Recette $recette): self
     {
         if (!$this->recettes->contains($recette)) {
             $this->recettes[] = $recette;
@@ -69,7 +69,7 @@ class Categories
         return $this;
     }
 
-    public function removeRecette(Recettes $recette): self
+    public function removeRecette(Recette $recette): self
     {
         if ($this->recettes->contains($recette)) {
             $this->recettes->removeElement($recette);

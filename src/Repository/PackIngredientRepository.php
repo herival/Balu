@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Packingredients;
+use App\Entity\PackIngredient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Packingredients|null find($id, $lockMode = null, $lockVersion = null)
- * @method Packingredients|null findOneBy(array $criteria, array $orderBy = null)
- * @method Packingredients[]    findAll()
- * @method Packingredients[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PackIngredient|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PackIngredient|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PackIngredient[]    findAll()
+ * @method PackIngredient[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PackingredientsRepository extends ServiceEntityRepository
+class PackIngredientRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Packingredients::class);
+        parent::__construct($registry, PackIngredient::class);
     }
 
     // /**
-    //  * @return Packingredients[] Returns an array of Packingredients objects
+    //  * @return PackIngredient[] Returns an array of PackIngredient objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PackingredientsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Packingredients
+    public function findOneBySomeField($value): ?PackIngredient
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
