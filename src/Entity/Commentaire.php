@@ -28,7 +28,7 @@ class Commentaire
     private $note;
 
     /**
-     * @ORM\ManyToOne(targetEntity=recette::class, inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity=Recette::class, inversedBy="commentaires")
      */
     private $recette;
 

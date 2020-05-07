@@ -33,12 +33,12 @@ class Commande
     private $etat;
 
     /**
-     * @ORM\ManyToOne(targetEntity=recette::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=Recette::class, inversedBy="commandes")
      */
     private $recette;
 
     /**
-     * @ORM\ManyToOne(targetEntity=membre::class, inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $membre;

@@ -57,7 +57,7 @@ class RecetteController extends AbstractController
             'liste_recettes' => $liste_recettes,
         ]);
 
-        return $this->render('recette/index.html.twig');
+        
     }
 
 }

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandeController!{% endblock %}
+
+{% block body %}
+<h1>Gestion commande</h1>
+
+<table class="table table-bordered">
+
+    <thead class="thead-dark text-uppercase">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Membre</th>
+            <th scope="col ">Recette</th>
+            <th scope="col">Montant</th>
+            <th scope="col">Date</th>
+            <th scope="col">Etat</th>
+        </tr>
+    </thead>
+    <tbody>
+
+     {% for commande in liste_commande %}
+        <tr>
+            <td> {{ commande.id }} </td>
+            <td> 
+                {% for membre in commande.membre %}  
+                {{ membre.mail }} 
+                {% endfor %}
+            </td> 
+            <td> 
+                {% for recette in commande.recette %}  
+                {{ recette.titre }} 
+                {% endfor %}
+            </td> 
+                       
+            <td> {{ commande.date | date("m/d/Y")   }} </td> 
+            <td> {{ commande.etat }} </td> 
+
+        </tr>
+    {% endfor %} 
+    </tbody>
+
+
+
+{% endblock %}
