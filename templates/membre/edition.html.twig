@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Edition{% endblock %}
+{% block body %}
+<div class="container">
+<h2 class="text-center">Edition membre</h2>
+
+
+{{ form_start(formMembre) }}
+
+    {{ form_row(formMembre.email) }}
+    {{ form_row(formMembre.password) }}
+    {{ form_row(formMembre.roles) }}
+
+    {{ form_row(formMembre.Pseudo) }}
+    {{ form_row(formMembre.nom) }}
+    {{ form_row(formMembre.prenom) }}
+    {{ form_row(formMembre.adresse) }}
+
+
+
+    <button class="btn btn-primary" type="submit">Modifier</button>
+    <a href="{{ path('liste_membre') }} " class="btn btn-primary">Annuler</a>
+    {#
+    <a href="{{ path('supprimer_membre', {"id":membre.id}) }}" onclick="return confirm('Voulez-vous supprimer cet utilisateur?')" class="btn btn-danger">Supprimer le membre!</a> 
+    #}
+
+{{ form_end(formMembre) }}
+</div>
+
+    
+{% endblock body %}
