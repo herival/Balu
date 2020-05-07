@@ -30,7 +30,7 @@ class Packingredients
     private $prix;
 
     /**
-     * @ORM\OneToMany(targetEntity=Recettes::class, mappedBy="packingredients", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Recette::class, mappedBy="packingredients", orphanRemoval=true)
      */
     private $recettes;
 
@@ -69,14 +69,14 @@ class Packingredients
     }
 
     /**
-     * @return Collection|Recettes[]
+     * @return Collection|Recette[]
      */
     public function getRecettes(): Collection
     {
         return $this->recettes;
     }
 
-    public function addRecette(Recettes $recette): self
+    public function addRecette(Recette $recette): self
     {
         if (!$this->recettes->contains($recette)) {
             $this->recettes[] = $recette;
@@ -86,7 +86,7 @@ class Packingredients
         return $this;
     }
 
-    public function removeRecette(Recettes $recette): self
+    public function removeRecette(Recette $recette): self
     {
         if ($this->recettes->contains($recette)) {
             $this->recettes->removeElement($recette);

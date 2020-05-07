@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Liste des recettes
+{% endblock %}
+
+{% block body %}
+
+
+	<table class="table table-bordered">
+		<tr>
+			<th colspan="2" class="text-center">Nb de recettes :
+				{{ recette|length }}</th>
+		</tr>
+		<tr>
+			<th>Artiste</th>
+			<th>Description</th>
+			<th colspan="2">Actions</th>
+		</tr>
+		<tr>
+			{% for artiste in recette %}
+				<tr>
+					<td>
+						<a href="{{ path("recette_show", { id: recette.id }) }}">{{ recette.name|upper }}</a>
+					</td>
+					<td>{{ recette.description }}</td>
+					<td>
+						<a href="{{ path("recette_update", { id: recette.id }) }}" class="fa fa-pen"></a>
+					</td>
+					<td>
+						<a href="{{ path("recette_delete", { id: recette.id }) }}" class="fa fa-trash"></a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tr>
+	</table>
+
+
+{% endblock %}

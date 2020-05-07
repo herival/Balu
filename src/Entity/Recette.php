@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\RecettesRepository;
+use App\Repository\RecetteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=RecettesRepository::class)
+ * @ORM\Entity(repositoryClass=RecetteRepository::class)
  */
-class Recettes
+class Recette
 {
     /**
      * @ORM\Id()
@@ -28,12 +28,12 @@ class Recettes
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="recettes")
+     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="recette")
      */
     private $categorie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Packingredients::class, inversedBy="recettes")
+     * @ORM\ManyToOne(targetEntity=Packingredients::class, inversedBy="recette")
      * @ORM\JoinColumn(nullable=false)
      */
     private $packingredients;

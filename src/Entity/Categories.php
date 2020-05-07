@@ -25,13 +25,13 @@ class Categories
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity=Recettes::class, mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity=Recette::class, mappedBy="categorie")
      */
-    private $recettes;
+    private $recette;
 
     public function __construct()
     {
-        $this->recettes = new ArrayCollection();
+        $this->recette = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,27 +52,27 @@ class Categories
     }
 
     /**
-     * @return Collection|Recettes[]
+     * @return Collection|Recette[]
      */
-    public function getRecettes(): Collection
+    public function getRecette(): Collection
     {
-        return $this->recettes;
+        return $this->recette;
     }
 
-    public function addRecette(Recettes $recette): self
+    public function addRecette(Recette $recette): self
     {
-        if (!$this->recettes->contains($recette)) {
-            $this->recettes[] = $recette;
+        if (!$this->recette->contains($recette)) {
+            $this->recette[] = $recette;
             $recette->setCategorie($this);
         }
 
         return $this;
     }
 
-    public function removeRecette(Recettes $recette): self
+    public function removeRecette(Recette $recette): self
     {
-        if ($this->recettes->contains($recette)) {
-            $this->recettes->removeElement($recette);
+        if ($this->recette->contains($recette)) {
+            $this->recette->removeElement($recette);
             // set the owning side to null (unless already changed)
             if ($recette->getCategorie() === $this) {
                 $recette->setCategorie(null);
