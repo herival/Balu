@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche Membre{% endblock %}
+
+{% block body %}
+<div class="container">
+<h2 class="text-center">Fiche Membre</h2>
+<div class="col-6 mx-auto">
+<table class="table table-bordered">
+    <tbody class="thead-dark">
+      <tr>
+       <th scope="row " style="width: 20%;">Id</th>
+        <td>{{ membre.id }}</td>
+      </tr> 
+      <tr>
+       <th scope="row">E-mail</th>
+        <td>{{ membre.email }}</td>
+      </tr> 
+      <tr>
+       <th scope="row">Pseudo</th>
+        <td>{{ membre.Pseudo }}</td>
+      </tr> 
+      <tr>
+       <th scope="row">Nom</th>
+        <td>{{ membre.nom }}</td>
+      </tr> 
+      <tr>
+       <th scope="row">Prénom</th>
+        <td>{{ membre.prenom }}</td>
+      </tr> 
+      <tr>
+       <th scope="row">Adresse</th>
+        <td>{{ membre.adresse }}</td>
+      </tr> 
+
+    </tbody>
+</table>
+<a href=" {{ path('modifier_membre', {"id":membre.id }) }} " class="btn btn-primary">Modifier</a>
+<a href=" {{ path('accueil') }} " class="btn btn-primary">Retour</a>
+  
+</div>
+</div>
+{% endblock %}
