@@ -1,43 +1,69 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Fiche Membre{% endblock %}
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Membre{% endblock %}
 
 {% block body %}
-<div class="container">
-<h2 class="text-center">Fiche Membre</h2>
-<div class="col-6 mx-auto">
-<table class="table table-bordered">
-    <tbody class="thead-dark">
-      <tr>
-       <th scope="row " style="width: 20%;">Id</th>
-        <td>{{ membre.id }}</td>
-      </tr> 
-      <tr>
-       <th scope="row">E-mail</th>
-        <td>{{ membre.email }}</td>
-      </tr> 
-      <tr>
-       <th scope="row">Pseudo</th>
-        <td>{{ membre.Pseudo }}</td>
-      </tr> 
-      <tr>
-       <th scope="row">Nom</th>
-        <td>{{ membre.nom }}</td>
-      </tr> 
-      <tr>
-       <th scope="row">Prénom</th>
-        <td>{{ membre.prenom }}</td>
-      </tr> 
-      <tr>
-       <th scope="row">Adresse</th>
-        <td>{{ membre.adresse }}</td>
-      </tr> 
 
-    </tbody>
-</table>
-<a href=" {{ path('modifier_membre', {"id":membre.id }) }} " class="btn btn-primary">Modifier</a>
-<a href=" {{ path('accueil') }} " class="btn btn-primary">Retour</a>
-  
-</div>
-</div>
+      
+        <div class="container-fluid">
+
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Membres</h1>
+            <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+          </div>
+
+          <div class="row tableaudebord">
+
+     
+            <div class="col-12">
+              <div class="card shadow mb-4">
+       
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Fiche Membre : 
+                    {% for role in membre.roles %}
+                        <span class="text-danger">{{ role }} </span>   
+                    {% endfor %}  
+                    </h6>
+                </div>
+            
+                <div class="card-body">
+     
+                    <table class="table table-bordered">
+                        <tbody class="thead-dark">
+                          <tr>
+                           <th scope="row " style="width: 20%;">Id</th>
+                            <td>{{ membre.id }}</td>
+                          </tr> 
+                          <tr>
+                           <th scope="row">E-mail</th>
+                            <td>{{ membre.email }}</td>
+                          </tr> 
+                          <tr>
+                           <th scope="row">Pseudo</th>
+                            <td>{{ membre.Pseudo }}</td>
+                          </tr> 
+                          <tr>
+                           <th scope="row">Nom</th>
+                            <td>{{ membre.nom }}</td>
+                          </tr> 
+                          <tr>
+                           <th scope="row">Prénom</th>
+                            <td>{{ membre.prenom }}</td>
+                          </tr> 
+                          <tr>
+                           <th scope="row">Adresse</th>
+                            <td>{{ membre.adresse }}</td>
+                          </tr> 
+                        </tbody>
+                    </table>
+                    
+                </div>
+              </div>
+              <a href=" {{ path('modifier_membre', {"id":membre.id }) }} "  class="btn btn-primary shadow-sm">Modifier</a>
+            </div>
+
+
+          </div>
 {% endblock %}

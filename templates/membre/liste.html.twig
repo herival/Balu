@@ -1,61 +1,83 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Liste Membre{% endblock %}
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Membre{% endblock %}
 
 {% block body %}
-<div class="container">
-<h1 class="text-center">Membres</h1>
 
-<table class="table table-bordered">
+      
+        <div class="container-fluid">
 
-    <thead class="thead-dark text-uppercase text-center">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">email</th>
-            <th scope="col ">roles</th>
-            <th scope="col">pseudo</th>
-            <th scope="col">nom</th>
-            <th scope="col">prenom</th>
-            <th scope="col">adresse</th>
-            <th scope="col">edit</th>
-        </tr>
-    </thead>
-    <tbody>
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Membres</h1>
+            <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
 
-     {% for membre in liste_membre %}
-        <tr>
-            <td> {{ membre.id }} </td>
-            <td> {{ membre.email }} </td> 
-           
-            <td class="text-center"> {% for role in membre.roles %}  
-                
-                {% if role == "ROLE_ADMIN" %}
-                    Administrateur
-                {% elseif role == "ROLE_USER" %}
-                    Membre
-                {% else %}
-                    Contributeur
-                {% endif %} 
-                
-                {% endfor %}
-            </td> 
-           
+
+          </div>
+
+          <div class="row tableaudebord">
+
+     
+            <div class="col-12">
+              <div class="card shadow mb-4">
+       
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Tous les Membres</h6>
+                </div>
             
-            <td> {{ membre.pseudo }} </td> 
-            <td> {{ membre.nom }} </td> 
-            <td> {{ membre.prenom }} </td> 
-            <td> {{ membre.adresse }} </td> 
-            <td> 
-                <a href="{{ path('fiche_membre', {"id":membre.id}) }}"><i class="fa fa-eye"></i> </a>
-                <a href="{{ path('modifier_membre', {"id":membre.id}) }}"><i class="fa fa-edit"></i></a> 
-                <a href="{{ path('supprimer_membre', {"id":membre.id}) }}" onclick="return confirm('Voulez-vous supprimer cet utilisateur?')" class="text-danger"> <i class="fa fa-trash"></i> </a> 
-            
-            </td> 
-        </tr>
-    {% endfor %} 
-    </tbody>
+                <div class="card-body">
+     
+                  <table class="table table-bordered">
 
-
-
-</div>
+                    <thead class="thead-dark text-uppercase text-center">
+                        <tr>
+                            <th scope="col"style="width:4%;">ID</th>
+                            <th scope="col" style="width:15%;">email</th>
+                            <th scope="col"style="width:10%;">Pseudo</th>
+                            <th scope="col">nom</th>
+                            <th scope="col">prenom</th>
+                            <th scope="col">adresse</th>
+                            <th scope="col" style="width:10%;">roles</th>
+                            <th scope="col" style="width:6%;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                     {% for membre in liste_membre %}
+                        <tr>
+                            <td> {{ membre.id }} </td>
+                            <td> {{ membre.email }} </td> 
+                           
+                            
+                            
+                            <td> {{ membre.pseudo }} </td> 
+                            <td> {{ membre.nom }} </td> 
+                            <td> {{ membre.prenom }} </td> 
+                            <td> {{ membre.adresse }} </td> 
+                            <td class="text-center"> {% for role in membre.roles %}  
+                                
+                                {% if role == "ROLE_ADMIN" %}
+                                    Admin
+                                {% elseif role == "ROLE_USER" %}
+                                    Membre
+                                {% else %}
+                                    Contributeur
+                                {% endif %} 
+                                
+                                {% endfor %}
+                            </td> 
+                            <td class="text-center"> 
+                                <a href="{{ path('fiche_membre', {"id":membre.id}) }}"><i class="fa fa-eye"></i> </a>
+                                <a href="{{ path('modifier_membre', {"id":membre.id}) }}"><i class="fa fa-edit"></i></a> 
+                                <a href="{{ path('supprimer_membre', {"id":membre.id}) }}" onclick="return confirm('Voulez-vous supprimer cet utilisateur?')" class="text-danger"> <i class="fa fa-trash"></i> </a> 
+                            
+                            </td> 
+                        </tr>
+                    {% endfor %} 
+                    </tbody>
+                  </table>                   
+                </div>
+              </div>
+            </div>
+          </div>
 {% endblock %}
