@@ -1,62 +1,65 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-.commentaire{
-    min-height: 38vh;
-}
-.tableaudebord{
-    min-height: 58vh;
-}
 body {
-    background-color: whitesmoke;
+    background-image: url('../../public/img/1.png');
 }
 
-nav.titre {
-    background-color: whitesmoke;
-    width: 0 auto;
-    height: 400px;
-    text-align: center;
-    margin-top: 150px;
-}
-
-.titre h1 {
+a.navbar-brand {
     font-family: 'Lobster', cursive;
-    text-align: center;
+    font-size: x-large;
+}
+
+.recettes { 
+    // position: relative; 
+    // left: 10%; 
+    // bottom: 20%;
+    display: flex;
+    flex-direction: column; 
+}
+
+.titre {
     position: relative;
-    bottom: 50%;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.contenu {
-    background-image: url("/img/1.png");
-    min-height: 70vh;
+h1, h2 {
+    font-family: 'Lobster', cursive;
+    text-align: center; 
+    color: rgb(240, 237, 51);
 }
 
-// .recettes {
+.card-columns {
+    justify-content: space-around;
+    align-self: center;
+}
 
-// }
-
-// .card {
-//     position: relative;
-//     left: 50%;
-// }
 // ######################## FOOTER ########################## //
 section {
     min-height: 775px; 
     max-width:1000px;
 }
 
-footer .fin {
+footer {
     background-color: rgb(64, 64, 92);
-    color: whitesmoke;
-    align-content: center;
-    display: flex; 
+    
 }
 
-footer .fin ul {
+footer .fin {
     display: flex;
-    list-style: none;
-    margin: 13px auto;
-    margin-bottom: 1em;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+footer .fin a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+footer .fin a:hover {
+    color: red;
 }
 
 footer p {

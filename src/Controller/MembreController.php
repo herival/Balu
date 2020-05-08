@@ -31,6 +31,7 @@ class MembreController extends AbstractController
     {
         
         $liste_membre = $membre->findAll();
+        // $liste_membre = $membre->findBy(array('roles'=> [] ));
 
         return $this->render('membre/liste.html.twig', [
             'liste_membre' => $liste_membre,
@@ -90,6 +91,30 @@ class MembreController extends AbstractController
 
         return $this->render('membre/fiche.html.twig', [
             'membre' => $membre,
+        ]);
+    }
+
+    /**
+     * @Route("/membre/liste_admin", name="liste_membre_admin")
+     */
+    public function liste_membre_admin(MembreRepository $membre)
+    {
+        $liste_membre = $membre->findByRoles('["ROLE_ADMIN"]');
+
+        return $this->render('membre/liste.html.twig', [
+            'liste_membre' => $liste_membre,
+        ]);
+    }
+
+    /**
+     * @Route("/membre/liste_membre", name="liste_membre_membre")
+     */
+    public function liste_membre_membre(MembreRepository $membre)
+    {
+        $liste_membre = $membre->findByRoles('[]');
+
+        return $this->render('membre/liste.html.twig', [
+            'liste_membre' => $liste_membre,
         ]);
     }
 
