@@ -29,6 +29,11 @@ class Categorie
      */
     private $recettes;
 
+    public function __toString() 
+    {
+        return $this->getCategorie();
+    }
+
     public function __construct()
     {
         $this->recettes = new ArrayCollection();

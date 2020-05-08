@@ -44,6 +44,7 @@ class Recette
      */
     private $categorie;
 
+
     /**
      * @ORM\ManyToOne(targetEntity=PackIngredient::class, inversedBy="recettes")
      */

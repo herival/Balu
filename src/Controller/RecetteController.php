@@ -38,7 +38,7 @@ class RecetteController extends AbstractController
         $formRecette->handleRequest($request);
         
         if($formRecette->isSubmitted() && $formRecette->isValid()){
-            
+            // il faut ajouter une fonction __toString() dans l'entité Categorie pour convertir les valeur en string
             $em->persist($nouvelle_recette);
             $em->flush();
             
