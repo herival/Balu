@@ -1,0 +1,42 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Categorie recette
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Ajout categorie</h1>
+      <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+
+    </div>
+
+    <div class="row tableaudebord">
+
+
+      <div class="col-lg-6 col-sm-12">
+        <div class="card shadow mb-4">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Nouvelle categorie</h6>
+          </div>
+      
+          <div class="card-body">
+
+                {{ form_start(formCategorie) }}
+                     {{ form_widget(formCategorie) }}
+                     <button class="btn btn-primary shadow-sm">Valider</button>
+                     <a href="{{ path('categorie_recette') }}"class="btn btn-danger shadow-sm">Annuler</a>
+                {{ form_end(formCategorie) }}
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}
