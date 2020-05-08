@@ -6,19 +6,21 @@ use App\Entity\Recette;
 use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class RecetteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('titre', TextType::class, [ 
                 "label" => "Nom de la recette",
@@ -65,7 +67,10 @@ class RecetteType extends AbstractType
                 ],
                  "required" => true
             ])
-            ->add('categorie', EntityType::class, [ "class" => Categorie::class, "choice_label" => "name" ]) 
+            ->add('categorie', EntityType::class, [ 
+                    "class" => Categorie::class, 
+                    "choice_label" => "categorie" 
+                    ]) 
             ->add('pack_ingredient')
             // ->add('membre')
         ;

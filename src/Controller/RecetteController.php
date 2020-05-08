@@ -33,19 +33,19 @@ class RecetteController extends AbstractController
     public function ajouter_recette(Request $request, EntityManager $em)
     {
         $nouvelle_recette = new Recette;
-
         $formRecette = $this->createForm(RecetteType::class, $nouvelle_recette);
-
+        
         $formRecette->handleRequest($request);
-
+        
         if($formRecette->isSubmitted() && $formRecette->isValid()){
-
+            
             $em->persist($nouvelle_recette);
             $em->flush();
-
+            
             return $this->redirectToRoute("recette");
         }
-
+        
+        // dd($nouvelle_recette);
         return $this->render('recette/formRecette.html.twig', 
         ["formRecette" => $formRecette->createView(), 'titre'=> 'Nouvelle Recette', 'bouton'=>'Enregistrer' ]
     );
