@@ -30,7 +30,8 @@ class MembreController extends AbstractController
     public function liste(MembreRepository $membre)
     {
         
-        $liste_membre = $membre->findAll();
+        $liste_membre = $membre->findByRoles();
+        // $liste_membre = $membre->findBy(array('roles'=> [] ));
 
         return $this->render('membre/liste.html.twig', [
             'liste_membre' => $liste_membre,
