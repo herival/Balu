@@ -40,11 +40,11 @@ class MembreRepository extends ServiceEntityRepository implements PasswordUpgrad
      * @return Membre[] Returns an array of Membre objects
      */
     
-    public function findByRoles()
+    public function findByRoles($value)
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.roles = :val')
-            ->setParameter('val', '["ROLE_ADMIN"]')
+            ->setParameter('val', $value)
             ->orderBy('m.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
