@@ -1,6 +1,67 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
 
+.commentaire{
+    min-height: 38vh;
+}
+.tableaudebord{
+    min-height: 58vh;
+}
 body {
-    background-color: lightgray;
+    background-color: whitesmoke;
+}
+
+nav.titre {
+    background-color: whitesmoke;
+    width: 0 auto;
+    height: 400px;
+    text-align: center;
+    margin-top: 150px;
+}
+
+.titre h1 {
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    position: relative;
+    bottom: 50%;
+}
+
+.contenu {
+    background-image: url("/img/1.png");
+    min-height: 70vh;
+}
+
+// .recettes {
+
+// }
+
+// .card {
+//     position: relative;
+//     left: 50%;
+// }
+// ######################## FOOTER ########################## //
+section {
+    min-height: 775px; 
+    max-width:1000px;
+}
+
+footer .fin {
+    background-color: rgb(64, 64, 92);
+    color: whitesmoke;
+    align-content: center;
+    display: flex; 
+}
+
+footer .fin ul {
+    display: flex;
+    list-style: none;
+    margin: 13px auto;
+    margin-bottom: 1em;
+}
+
+footer p {
+    background-color: rgb(64, 64, 92);
+    color: whitesmoke;
+    height: 50px;
+    padding: 10px;
 }

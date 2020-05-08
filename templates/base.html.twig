@@ -8,9 +8,21 @@
         {% endblock %}
     </head>
     <body>
-        {% include "nav.html.twig" %}
+
+        
+        
+        {% include "menu.html.twig" %}
+        <!-- a enlever  -->
+         {% include "navbrouillon.html.twig" %}
+        <!-- fin nav brouillon  -->
+
+
         {% block body %}
                 
+
+
+        {% endblock %}
+        
         <footer style="height: 50px; padding: 10px; ">
             <div class="fin">
                 <ul>
@@ -23,9 +35,6 @@
             <p class="text-center"> ©Copyright - Mai 2020 </p>
         </footer>
 
-
-        {% endblock %}
-        
         {% block javascripts %}
          {{ encore_entry_script_tags("app") }}
         {% endblock %}

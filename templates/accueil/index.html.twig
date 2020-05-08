@@ -1,20 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccueilController!{% endblock %}
+{% block title %}BALU !{% endblock %}
+
+{% block h1 %}BIENVENUE CHEZ BALU !{% endblock %}
 
 {% block body %}
-<style>
+
+{# <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+</style> #}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/ProjetSoutenance/src/Controller/AccueilController.php'|file_link(0) }}">src/Controller/AccueilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/ProjetSoutenance/templates/accueil/index.html.twig'|file_link(0) }}">templates/accueil/index.html.twig</a></code></li>
-    </ul>
+<div class="contenu">
+   
+    <h2>Recettes</h2>
+    <div class="recettes">
+        <div class="card-columns">
+            {# {% for recette in recettes %}
+                {% include "recette/vignette.html.twig" %}
+            {% endfor %} #}
+            <div class="card" style="width: 18rem;">
+                <img src="Sans titre(15).png" class="card-img-top" alt="...">
+                     <div class="card-body">
+                        <h5 class="card-title">Recette</h5>
+                        <p class="card-text">description</p>
+                     </div>
+                <a style="margin-top: 10px;" href="" class="card-link" class="btn btn-primary">Cliquez ici</a>
+            </div>
+        </div>
+        <div class="card-columns">
+            <div class="card" style="width: 18rem;">
+                <img src="Sans titre(17).png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Recette</h5>
+                        <p class="card-text">description</p>
+                    </div>
+                    
+                    <a style="margin-top: 10px;" href="" class="card-link" class="btn btn-primary">Cliquez ici</a>
+            {# <a href="{{ path("recette_fiche", { id: recette.id }) }}" class="card-link">
+                <i class="fa fa-eye"></i>
+            </a> #}
+            </div>
+        </div>
+        <div class="card-columns">
+            <div class="card" style="width: 18rem;">
+                <img src="img/Sans titre(17).png" class="card-img-top" alt="...">
+                     <div class="card-body">
+                        <h5 class="card-title">Recette</h5>
+                        <p class="card-text">description</p>
+                    </div>
+                <a style="margin-top: 10px;" href="" class="card-link" class="btn btn-primary">Cliquez ici</a>
+            {# <a href="{{ path("recette_fiche", { id: recette.id }) }}" class="card-link">
+                <i class="fa fa-eye"></i>
+            </a> #}
+            </div>
+        </div>
+    </div>
 </div>
+   
+
+
 {% endblock %}
