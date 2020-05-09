@@ -1,13 +1,13 @@
 {% extends 'basebackoffice.html.twig' %}
 
-{% block title %}Hello CommandeController!{% endblock %}
+{% block title %}Liste commande{% endblock %}
 
 {% block body %}
 
 <div class="container-fluid">
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Gestion des</h1>
+      <h1 class="h3 mb-0 text-gray-800">Commandes</h1>
       <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
 
 
@@ -31,10 +31,12 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Membre</th>
-                        <th scope="col ">Recette</th>
+                        <th scope="col ">Email</th>
                         <th scope="col">Montant</th>
                         <th scope="col">Date</th>
                         <th scope="col">Etat</th>
+                        <th scope="col">Action</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -42,20 +44,12 @@
                  {% for commande in liste_commande %}
                     <tr>
                         <td> {{ commande.id }} </td>
-                        <td> 
-                            {% for membre in commande.membre %}  
-                            {{ membre.mail }} 
-                            {% endfor %}
-                        </td> 
-                        <td> 
-                            {% for recette in commande.recette %}  
-                            {{ recette.titre }} 
-                            {% endfor %}
-                        </td> 
-                                   
-                        <td> {{ commande.date | date("m/d/Y")   }} </td> 
-                        <td> {{ commande.etat }} </td> 
-            
+                        <td> {{ commande.membre.pseudo }} </td>
+                        <td> {{ commande.membre.email }} </td>
+                        <td> {{ commande.montant }} € </td>
+                        <td> {{ commande.date |date("d/m/Y") }} </td>
+                        <td> {{ commande.etat }} </td>
+                        <td class="text-center"> <a href="{{path('detail_commande', {'id':commande.id})}}" ><i class="fa fa-eye"></i> </a> </td>
                     </tr>
                 {% endfor %} 
                 </tbody>
@@ -67,10 +61,5 @@
         </div>
       </div>
     </div>
-
-
-
-
-
 
 {% endblock %}

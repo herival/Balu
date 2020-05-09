@@ -19,6 +19,20 @@ class RecetteRepository extends ServiceEntityRepository
         parent::__construct($registry, Recette::class);
     }
 
+    /**
+     * @return Recette[] Returns an array of Recette objects
+     */
+    
+    public function findById($value)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.id = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
     // /**
     //  * @return Recette[] Returns an array of Recette objects
     //  */

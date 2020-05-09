@@ -34,6 +34,7 @@ class PackIngredient
      */
     private $recettes;
 
+
     public function __construct()
     {
         $this->recettes = new ArrayCollection();
@@ -98,4 +99,5 @@ class PackIngredient
 
         return $this;
     }
+
 }

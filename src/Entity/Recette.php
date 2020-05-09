@@ -65,10 +65,26 @@ class Recette
      */
     private $membre;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Detailcommande::class, mappedBy="recette")
+     */
+    private $detailcommandes;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $vente;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $prix;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->commandes = new ArrayCollection();
+        $this->detailcommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,6 +234,61 @@ class Recette
     public function setMembre(?membre $membre): self
     {
         $this->membre = $membre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Detailcommande[]
+     */
+    public function getDetailcommandes(): Collection
+    {
+        return $this->detailcommandes;
+    }
+
+    public function addDetailcommande(Detailcommande $detailcommande): self
+    {
+        if (!$this->detailcommandes->contains($detailcommande)) {
+            $this->detailcommandes[] = $detailcommande;
+            $detailcommande->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailcommande(Detailcommande $detailcommande): self
+    {
+        if ($this->detailcommandes->contains($detailcommande)) {
+            $this->detailcommandes->removeElement($detailcommande);
+            // set the owning side to null (unless already changed)
+            if ($detailcommande->getRecette() === $this) {
+                $detailcommande->setRecette(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getVente(): ?bool
+    {
+        return $this->vente;
+    }
+
+    public function setVente(bool $vente): self
+    {
+        $this->vente = $vente;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?float $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

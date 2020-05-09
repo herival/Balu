@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,15 +35,22 @@ class Commande
     private $etat;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Recette::class, inversedBy="commandes")
-     */
-    private $recette;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Membre::class, inversedBy="commandes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $membre;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Detailcommande::class, mappedBy="commande")
+     */
+    private $detailcommandes;
+
+    
+    public function __construct()
+    {
+        $this->detailcommandes = new ArrayCollection();
+        $this->date = new \DateTime('now');
+    }
 
     public function getId(): ?int
     {
@@ -84,18 +93,6 @@ class Commande
         return $this;
     }
 
-    public function getRecette(): ?recette
-    {
-        return $this->recette;
-    }
-
-    public function setRecette(?recette $recette): self
-    {
-        $this->recette = $recette;
-
-        return $this;
-    }
-
     public function getMembre(): ?membre
     {
         return $this->membre;
@@ -104,6 +101,37 @@ class Commande
     public function setMembre(?membre $membre): self
     {
         $this->membre = $membre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Detailcommande[]
+     */
+    public function getDetailcommandes(): Collection
+    {
+        return $this->detailcommandes;
+    }
+
+    public function addDetailcommande(Detailcommande $detailcommande): self
+    {
+        if (!$this->detailcommandes->contains($detailcommande)) {
+            $this->detailcommandes[] = $detailcommande;
+            $detailcommande->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailcommande(Detailcommande $detailcommande): self
+    {
+        if ($this->detailcommandes->contains($detailcommande)) {
+            $this->detailcommandes->removeElement($detailcommande);
+            // set the owning side to null (unless already changed)
+            if ($detailcommande->getCommande() === $this) {
+                $detailcommande->setCommande(null);
+            }
+        }
 
         return $this;
     }
