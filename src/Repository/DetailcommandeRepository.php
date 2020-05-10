@@ -29,7 +29,16 @@ class DetailcommandeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('d')
             ->andWhere('d.commande = :val')
             ->setParameter('val', $value)
-            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByRecette($value)
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.recette = :val')
+            ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
         ;

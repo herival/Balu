@@ -1,0 +1,111 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Recettes
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Recettes</h1>
+      <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+
+    </div>
+
+    <div class="row tableaudebord">
+
+
+      <div class="col-lg-6">
+        <div class="card shadow mb-4">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Edition recette</h6>
+          </div>
+          
+          <div class="card-body">
+
+            
+              {{ form_start(formRecette) }}
+                {{ form_widget(formRecette) }}
+                <button type="submit" class="btn btn-primary shadow">Modifier</button>
+                <a href="{{path('admin_liste_recette')}}" class="btn btn-secondary shadow">Annuler</a>
+              {{ form_end(formRecette) }}
+                 
+
+          </div>
+        
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card shadow mb-4">
+           
+            
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Les ingredients de la recette</h6>
+          </div>
+          
+          <div class="card-body">
+            <h3 class="alert alert-danger text-center col-6">Prix: {{recetteAmodifier.prix }} €</h3>
+            
+
+            {{ form_start(formIngredient) }}
+    
+
+            <div class="form-row">
+                <div class="col-lg-4">
+                    {{ form_row(formIngredient.libelle) }}
+                </div>
+                <div class="col-lg-2">
+                    {{ form_row(formIngredient.quantite) }}
+                </div>
+                <div class="col-lg-2">
+                    {{ form_row(formIngredient.unite) }}
+                </div>
+                <div class="col-lg-2">
+                    {{ form_row(formIngredient.prix) }}
+                </div>
+                <div class="col-lg-2">
+                    
+                    <label class="none col-12" for="">.</label>
+                    <button type="submit" class="btn btn-primary col-lg-12"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</button>
+                    
+                </div>
+    
+            </div>
+    
+        {{ form_end(formIngredient) }}
+
+
+            
+            <ul class="list-group col-12 mb-2">
+                <li class="list-group-item list-group-item-info">Le pack ingredient 
+                  </li>
+                {% for ingredient in recetteAmodifier.packIngredients %}
+    
+                <li class="list-group-item">
+                    <a href="{{path('supprimer_ingredient', {"id":ingredient.id})}}"><i class="fa fa-trash text-danger"></i></a>
+                    <i class="fa fa-check" aria-hidden="true"></i> 
+                    {{ ingredient.quantite }} {{ ingredient.unite }} -> {{ ingredient.libelle }} -- <span class="badge badge-secondary">Prix : {{ ingredient.prix }} € </span> 
+                </li>
+                {% endfor %}
+                <li class=" list-group-item text-center">
+                    <img src="{{asset("img/" ~ recetteAmodifier.image )}}" alt="">
+                </li>
+
+            </ul>
+
+          </div>
+        
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+{% endblock %}
