@@ -27,8 +27,21 @@ class RecetteController extends AbstractController
     { 
         $liste_recettes = $ar->findAll();
 
+        
         return $this->render('recette/index.html.twig', [
             'liste_recettes' => $liste_recettes
+        ]);
+    }
+
+    /**
+     * @Route("/recette/fiche/{id}", name="fiche_recette")
+     */
+    public function fiche_recette($id, RecetteRepository $ar)
+    { 
+        $recette = $ar->find($id);
+        dump($recette);
+        return $this->render('recette/ficherecette.html.twig', [
+            'recette' => $recette
         ]);
     }
 
@@ -66,7 +79,7 @@ class RecetteController extends AbstractController
                 $image->move($this->getParameter('dossier_images'), $nomImage);
                 $nouvelle_recette->setImage($nomImage);
             }
-
+            $nouvelle_recette->setMembre($this->getUser());
             $em->persist($nouvelle_recette);
             $em->flush();
 

@@ -4,12 +4,13 @@
 {% endblock %}
 
 {% block body %}
-<div class="container bg-light">
+<div class="container">
 	<h1>Nouvelle recette</h1>
 
+    <div class="col-lg-6 mx-auto text-dark bg-trans rounded-lg ">
 	{{ form_start(formRecette) }}
-        {{ form_row(formRecette.titre) }}
         {{ form_row(formRecette.categorie) }}
+        {{ form_row(formRecette.titre) }}
         {{ form_row(formRecette.description) }}
         {{ form_row(formRecette.image) }}
 
@@ -17,11 +18,8 @@
        
         <div hidden>{{ form_row(formRecette.vente) }}</div>
 
-        {# 
-        {{ form_row(formRecette.membre) }}
-        #}
-
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <button type="submit" class="btn btn-primary shadow mb-2">Enregistrer</button>
+    </div>
     {{ form_end(formRecette) }}
 </div>
 

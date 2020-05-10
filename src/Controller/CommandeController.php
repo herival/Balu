@@ -85,7 +85,7 @@ class CommandeController extends AbstractController
         }
     
         $session->set('panier', []);
-        return $this->redirectToRoute("liste_commande");  
+        return $this->redirectToRoute("recette");  
     }
 
     /**
