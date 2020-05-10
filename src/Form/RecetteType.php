@@ -7,6 +7,7 @@ use App\Entity\Categorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 
 class RecetteType extends AbstractType
 {
@@ -29,14 +31,14 @@ class RecetteType extends AbstractType
                     new Length([
                         "min" => 2,
                         "minMessage" => "Le nom de la recette doit comporter au moins 2 caractères",
-                        "max" => 20,
+                        "max" => 250,
                         "maxMessage" => "Le nom de la recette ne doit pas dépasser {{ limit }} caractères"
                     ])
                 ],
                  "required" => true
             ])
             ->add('description'
-            , TextType::class, [ 
+            , TextareaType::class, [ 
                 "label" => "description de la recette",
                 "constraints" => [
                     new NotBlank([ "message" => "Veuillez entrer la description de la recette"]),
@@ -49,20 +51,19 @@ class RecetteType extends AbstractType
                 ],
                  "required" => true
             ])
-            ->add('image', FileType::class, array(
+            ->add('image', FileType::class, [
                 'label'=> 'ajoutez une image',
                 'data_class' => null,
                 "required" => false
-            ))
-            ->add('preparation', TextType::class, [ 
+            ])
+            ->add('preparation', TextareaType::class, [ 
                 "label" => "préparation de la recette",
                 "constraints" => [
                     new NotBlank([ "message" => "Veuillez entrer la préparation de la recette"]),
                     new Length([
                         "min" => 10,
-                        "minMessage" => "La préparation de la recette doit comporter au moins 10 caractères",
-                        "max" => 500,
-                        "maxMessage" => "La préparation de la recette ne doit pas dépasser {{ limit }} caractères"
+                        "minMessage" => "La préparation de la recette doit comporter au moins 10 caractères"
+                      
                     ])
                 ],
                  "required" => true
@@ -71,7 +72,8 @@ class RecetteType extends AbstractType
                     "class" => Categorie::class, 
                     "choice_label" => "categorie" 
                     ]) 
-            ->add('pack_ingredient')
+        
+            ->add('vente', null)
             // ->add('membre')
         ;
     }

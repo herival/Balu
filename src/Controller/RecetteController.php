@@ -6,22 +6,39 @@ use App\Entity\Recette;
 use App\Entity\Categorie;
 use App\Form\RecetteType;
 use App\Form\CategorieType;
+use App\Entity\PackIngredient;
+use App\Form\PackIngredientType;
 use App\Repository\RecetteRepository;
 use App\Repository\CategorieRepository;
+use App\Repository\PackIngredientRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface as EntityManager;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RecetteController extends AbstractController
 {
+
     /**
      * @Route("/recette", name="recette")
      */
     public function index(RecetteRepository $ar)
     { 
         $liste_recettes = $ar->findAll();
+
         return $this->render('recette/index.html.twig', [
+            'liste_recettes' => $liste_recettes
+        ]);
+    }
+
+    /**
+     * @Route("/admin/recette", name="recette_backoffice")
+     */
+    public function recette_backoffice(RecetteRepository $ar)
+    { 
+        $liste_recettes = $ar->findAll();
+        return $this->render('recette/indexbackoffice.html.twig', [
             'liste_recettes' => $liste_recettes
         ]);
     }
@@ -30,8 +47,10 @@ class RecetteController extends AbstractController
      * @Route("/recette/new", name="ajouter_recette")
      * 
      */
-    public function ajouter_recette(Request $request, EntityManager $em)
+    public function ajouter_recette(SessionInterface $session, Request $request, EntityManager $em)
     {
+        $id_recette_encours = $session->get('id_recette_encours', []);
+
         $nouvelle_recette = new Recette;
         $formRecette = $this->createForm(RecetteType::class, $nouvelle_recette);
         
@@ -39,10 +58,25 @@ class RecetteController extends AbstractController
         
         if($formRecette->isSubmitted() && $formRecette->isValid()){
             // il faut ajouter une fonction __toString() dans l'entité Categorie pour convertir les valeur en string
+            $image = $formRecette->get("image")->getData();
+            if($image){
+                $nomImage = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $nomImage= str_replace(" ", "_", $nomImage);
+                $nomImage .= "_". uniqid().".".$image->guessExtension();
+                $image->move($this->getParameter('dossier_images'), $nomImage);
+                $nouvelle_recette->setImage($nomImage);
+            }
+
             $em->persist($nouvelle_recette);
             $em->flush();
+
+            $nv_recette_id = $nouvelle_recette->getId();
+
+            $id_recette_encours = $session->set('id_recette_encours', $nv_recette_id);
             
-            return $this->redirectToRoute("recette");
+
+            
+            return $this->redirectToRoute("ingredient_nouveau");
         }
         
         // dd($nouvelle_recette);
@@ -52,13 +86,13 @@ class RecetteController extends AbstractController
     }
 
     /**
-     * @Route("/recette/liste", name="liste_recette")
+     * @Route("/admin/recette/liste", name="liste_recette")
      */
     public function liste_recette(RecetteRepository $recette)
     {
         $liste_recettes = $recette->findAll();
 
-        return $this->render('recette/index.html.twig', [
+        return $this->render('recette/indexbackoffice.html.twig', [
             'liste_recettes' => $liste_recettes,
         ]);
 
@@ -196,6 +230,59 @@ class RecetteController extends AbstractController
             "bouton" => "Modifier",
             "titre" => "Modification de la catégorie n°$id" 
         ]);
+    }
+
+    /**
+     * @Route("/recette/ingredient/nouveau", name="ingredient_nouveau")
+     */
+    public function ajout_ingredient(SessionInterface $session, RecetteRepository $rec, PackIngredientRepository $ing, Request $rq, EntityManager $em)
+    {
+        $nouveau_ingredient = new PackIngredient; 
+        
+        $id_recette_encours = $session->get('id_recette_encours', []);
+        
+        $recette = $rec->find($id_recette_encours);
+        $PackIngredient = $ing->findByRecette($id_recette_encours);
+        
+
+        $formIngredient = $this->createForm(PackIngredientType::class, $nouveau_ingredient);
+        $formIngredient->handleRequest($rq);
+        if($formIngredient->isSubmitted() && $formIngredient->isValid()){
+            $nouveau_ingredient->setRecette($recette);
+            $em->persist($nouveau_ingredient);
+            $em->flush();
+
+            return $this->redirectToRoute("ingredient_nouveau");
+        }
+        return $this->render("recette/PackIngredient.html.twig", [ 
+            "formIngredient" => $formIngredient->createView(),
+            "ingredients"=> $PackIngredient,
+     
+        ]);
+    }
+
+    /**
+     * @Route("/recette/ingredient/terminer", name="ingredient_terminer")
+     */
+    public function terminer(SessionInterface $session, PackIngredientRepository $ing, RecetteRepository $rec, EntityManager $em )
+    {
+        $id_recette_encours = $session->get('id_recette_encours', []);
+
+        $recette = $rec->find($id_recette_encours);
+        $PackIngredient = $ing->findByRecette($id_recette_encours);
+        // dd($PackIngredient[0]);
+        $total = 0;
+        foreach ($PackIngredient as $key => $value){
+            $total = $total + $PackIngredient[$key]->getPrix();
+        }
+        
+        $recette->setPrix($total);
+        $em->persist($recette);
+        $em->flush();
+
+        $id_recette_encours = $session->set('id_recette_encours', []);
+
+        return $this->redirectToRoute("ajouter_recette");
     }
 
 

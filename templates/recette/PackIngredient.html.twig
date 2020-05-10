@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Recette
+{% endblock %}
+
+{% block body %}
+<div class="container bg-light">
+	<h1>Ajoutons les ingredients</h1>
+
+    {{ form_start(formIngredient) }}
+    
+
+        <div class="form-row">
+            <div class="col-lg-5">
+                {{ form_row(formIngredient.libelle) }}
+            </div>
+            <div class="col-lg-2">
+                {{ form_row(formIngredient.quantite) }}
+            </div>
+            <div class="col-lg-1">
+                {{ form_row(formIngredient.unite) }}
+            </div>
+            <div class="col-lg-2">
+                {{ form_row(formIngredient.prix) }}
+            </div>
+            <div class="col-lg-2">
+                
+                <label class="none col-12" for="">.</label>
+                <button type="submit" class="btn btn-primary col-lg-12"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter</button>
+                
+            </div>
+
+        </div>
+
+    {{ form_end(formIngredient) }}
+
+    {% if ingredients | length > 0 %}
+        <div class="row mt-2">
+        <ul class="list-group col-lg-6 mb-2">
+            <li class="list-group-item list-group-item-info">Nous avons besoin de :</li>
+            {% for ingredient in ingredients %}
+            <li class="list-group-item"><i class="fa fa-check" aria-hidden="true"></i>
+                {{ ingredient.quantite }} {{ ingredient.unite }} -> {{ ingredient.libelle }} 
+                pour {{ ingredient.prix }} €</li>
+            {% endfor %}
+        </ul>
+        <div class="col-lg-2">
+            <a class="btn btn-success col-12" href="{{ path('ingredient_terminer') }}">Terminer</a>
+        </div>
+        </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

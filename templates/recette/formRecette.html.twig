@@ -4,24 +4,26 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container bg-light">
 	<h1>Nouvelle recette</h1>
 
 	{{ form_start(formRecette) }}
-	{{ form_row(formRecette.titre) }}
-	{{ form_row(formRecette.description) }}
-	{{ form_row(formRecette.image) }}
-    {{ form_row(formRecette.categorie) }}
+        {{ form_row(formRecette.titre) }}
+        {{ form_row(formRecette.categorie) }}
+        {{ form_row(formRecette.description) }}
+        {{ form_row(formRecette.image) }}
 
-	{{ form_row(formRecette.preparation) }}
-	{{ form_row(formRecette.pack_ingredient) }}
-	{# 
-			    {{ form_row(formRecette.membre) }}
-			#}
+        {{ form_row(formRecette.preparation) }}
+       
+        <div hidden>{{ form_row(formRecette.vente) }}</div>
 
+        {# 
+        {{ form_row(formRecette.membre) }}
+        #}
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    {{ form_end(formRecette) }}
 </div>
-	<button type="submit" class="btn btn-primary">Enregistrer</button>
-	{{ form_end(formRecette) }}
 
 
 {% endblock %}

@@ -19,6 +19,21 @@ class PackIngredientRepository extends ServiceEntityRepository
         parent::__construct($registry, PackIngredient::class);
     }
 
+    /**
+     * @return PackIngredient[] Returns an array of PackIngredient objects
+     */
+    
+    public function findByRecette($value)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.recette = :val')
+            ->setParameter('val', $value)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
     // /**
     //  * @return PackIngredient[] Returns an array of PackIngredient objects
     //  */
@@ -34,8 +49,6 @@ class PackIngredientRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
-
     /*
     public function findOneBySomeField($value): ?PackIngredient
     {

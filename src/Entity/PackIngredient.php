@@ -34,6 +34,22 @@ class PackIngredient
      */
     private $recettes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Recette::class, inversedBy="packIngredients")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $recette;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $quantite;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $unite;
+
 
     public function __construct()
     {
@@ -96,6 +112,42 @@ class PackIngredient
                 $recette->setPackIngredient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRecette(): ?Recette
+    {
+        return $this->recette;
+    }
+
+    public function setRecette(?Recette $recette): self
+    {
+        $this->recette = $recette;
+
+        return $this;
+    }
+
+    public function getQuantite(): ?float
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(float $quantite): self
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getUnite(): ?string
+    {
+        return $this->unite;
+    }
+
+    public function setUnite(?string $unite): self
+    {
+        $this->unite = $unite;
 
         return $this;
     }

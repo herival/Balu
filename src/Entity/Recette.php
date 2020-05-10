@@ -44,12 +44,6 @@ class Recette
      */
     private $categorie;
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity=PackIngredient::class, inversedBy="recettes")
-     */
-    private $pack_ingredient;
-
     /**
      * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="recette")
      */
@@ -80,11 +74,17 @@ class Recette
      */
     private $prix;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PackIngredient::class, mappedBy="recette", orphanRemoval=true)
+     */
+    private $packIngredients;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->commandes = new ArrayCollection();
         $this->detailcommandes = new ArrayCollection();
+        $this->packIngredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,18 +148,6 @@ class Recette
     public function setCategorie(?categorie $categorie): self
     {
         $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    public function getPackIngredient(): ?packIngredient
-    {
-        return $this->pack_ingredient;
-    }
-
-    public function setPackIngredient(?packIngredient $pack_ingredient): self
-    {
-        $this->pack_ingredient = $pack_ingredient;
 
         return $this;
     }
@@ -289,6 +277,37 @@ class Recette
     public function setPrix(?float $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PackIngredient[]
+     */
+    public function getPackIngredients(): Collection
+    {
+        return $this->packIngredients;
+    }
+
+    public function addPackIngredient(PackIngredient $packIngredient): self
+    {
+        if (!$this->packIngredients->contains($packIngredient)) {
+            $this->packIngredients[] = $packIngredient;
+            $packIngredient->setRecette($this);
+        }
+
+        return $this;
+    }
+
+    public function removePackIngredient(PackIngredient $packIngredient): self
+    {
+        if ($this->packIngredients->contains($packIngredient)) {
+            $this->packIngredients->removeElement($packIngredient);
+            // set the owning side to null (unless already changed)
+            if ($packIngredient->getRecette() === $this) {
+                $packIngredient->setRecette(null);
+            }
+        }
 
         return $this;
     }

@@ -1,0 +1,91 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Recettes
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Recettes</h1>
+      <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+
+    </div>
+
+    <div class="row tableaudebord">
+
+
+      <div class="col-12">
+        <div class="card shadow mb-4">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Toutes les recettes</h6>
+          </div>
+      
+          <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <thead class="thead-dark text-uppercase">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">description</th>
+                        <th scope="col">image</th>
+                        <th scope="col">categorie</th>
+                        <th scope="col">preparation</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    {% for recette in liste_recettes %}
+                        <tr>
+                            <td>
+                                {{ recette.id }}
+                            </td>
+                            <td>
+                                {{ recette.titre }}
+                            </td>
+                            <td>
+                                {{ recette.description |slice(0, 90)}}...
+                            </td>
+                            <td>
+                                {{ recette.image }}
+                            </td>
+                            <td>
+                                {{ recette.categorie }}
+                            </td>
+                            <td>
+                                {{ recette.preparation |slice(0, 90)}}...
+                            </td>
+                            <td>
+                                <a href="{{ path("ajout_panier", { id: recette.id }) }}">
+                                    <i class="fa fa-guitar"></i>
+                                </a>
+                                <a href="{{ path("recette_modifier", { id: recette.id }) }}">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+        
+                                <a onclick="return confirm('Voulez-vous supprimer cette recette?')" href="{{ path("recette_supprimer", { id: recette.id }) }}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+        
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        
+            </table>
+            <a href="{{ path('ajouter_recette')}}" class="btn btn-primary shadow-sm">Ajouter</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}

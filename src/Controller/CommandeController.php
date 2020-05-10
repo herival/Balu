@@ -47,7 +47,7 @@ class CommandeController extends AbstractController
     {
         
         //recuperer le panier en cours
-        $panier = $session->get('panier'); 
+        $panier = $session->get('panier', []); 
         
         $total = 0;
         foreach ($panier as $id => $qtt)

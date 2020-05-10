@@ -6,51 +6,54 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ path ("accueil") }}">Accueil <span class="sr-only">(current)</span></a>
-      </li>
-
-      
+    
           <li class="nav-item">
             <a class="nav-link" href="{{ path ("recette") }}">Recettes</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path ("ajouter_recette") }}">Ajouter Recettes</a>
           </li>
      
     
 
-  {# {% if is_granted("IS_AUTHENTICATED_FULLY") %} #}
+  {% if is_granted("IS_AUTHENTICATED_FULLY") %}
   
     <li class="nav-item">
-        <a class="nav-link" href="{#{{ path ("app_logout") }}#}">
+      <a class="nav-link" href="{{ path ("panier") }}">
+        Panier</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_logout')}}">
         <i class="fa fa-sign-out-alt"></i>
         Deconnexion</a>
       </li>
 
-    {# {% else %} #}
+
+
+  {% else %}
 
       <li class="nav-item">
-        <a class="nav-link" href="{#{{ path ("app_login") }}#}">
+        <a class="nav-link" href="{{path('app_login')}}">
         <i class="fa fa-sign-in-alt"></i>
         Connexion</a>
       </li>
 
 
      <li class="nav-item">
-        <a class="nav-link" href="{#{{ path ("app_register") }}#}">
+        <a class="nav-link" href="{{ path('app_register')}}">
         <i class="fa fa-sign-user-plus"></i>
         Inscription</a>
       </li>
-
+    
+  {% endif %}
+  {% if is_granted("ROLE_ADMIN") %} 
       <li class="nav-item">
         <a class="nav-link" href="{{ path ("backoffice") }}">
         BackOffice</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path ("panier") }}">
-        Panier</a>
-      </li>
-
-      {# {% endif %} #}
-
+  {% endif %}
 
      
     </ul>
