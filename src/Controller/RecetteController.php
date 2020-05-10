@@ -10,6 +10,7 @@ use App\Entity\PackIngredient;
 use App\Form\PackIngredientType;
 use App\Repository\RecetteRepository;
 use App\Repository\CategorieRepository;
+use App\Repository\DetailcommandeRepository;
 use App\Repository\PackIngredientRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,9 +49,12 @@ class RecetteController extends AbstractController
     /**
      * @Route("/admin/recette", name="recette_backoffice")
      */
-    public function recette_backoffice(RecetteRepository $ar)
+    public function recette_backoffice(SessionInterface $session, RecetteRepository $ar)
     { 
         $liste_recettes = $ar->findAll();
+
+        $id_recette_modif = $session->set('id_recette_modif', []);
+
         return $this->render('recette/indexbackoffice.html.twig', [
             'liste_recettes' => $liste_recettes
         ]);
@@ -99,7 +103,7 @@ class RecetteController extends AbstractController
     }
 
     /**
-     * @Route("/admin/recette/liste", name="liste_recette")
+     * @Route("/admin/recette/liste", name="admin_liste_recette")
      */
     public function liste_recette(RecetteRepository $recette)
     {
@@ -149,21 +153,113 @@ class RecetteController extends AbstractController
     }
 
     /**
+     * @Route("/admin/recette/modifier/{id}", name="admin_recette_modifier", requirements={"id"="\d+"})
+     */
+    public function modifier_admin(
+        SessionInterface $session,
+        PackIngredientRepository $ing, 
+        Request $rq, 
+        EntityManager $em, 
+        RecetteRepository $ar, $id)
+    {
+
+        // $id_recette_modif = $session->get('id_recette_modif', []);
+        $id_recette_modif = $session->set('id_recette_modif', $id);
+        // dd($id);
+
+
+
+
+        $recetteAmodifier = $ar->find($id);
+        $image_origine = $recetteAmodifier->getImage();
+        $formRecette = $this->createForm(RecetteType::class, $recetteAmodifier);
+        $formRecette->handleRequest($rq);
+       
+        $nouveau_ingredient = new PackIngredient; 
+
+        $formIngredient = $this->createForm(PackIngredientType::class, $nouveau_ingredient);
+        $formIngredient->handleRequest($rq);
+
+        
+        if($formIngredient->isSubmitted() && $formIngredient->isValid()){
+            $nouveau_ingredient->setRecette($recetteAmodifier);
+            $em->persist($nouveau_ingredient);
+            $em->flush();
+            
+            $PackIngredient = $ing->findByRecette($id);
+            $total = 0;
+            foreach ($PackIngredient as $key => $value){
+                $total = $total + $PackIngredient[$key]->getPrix();
+            }
+            
+            $recetteAmodifier->setPrix($total);
+            $em->flush();
+
+            return $this->redirectToRoute("admin_recette_modifier", ["id"=>$id]);
+        }
+       
+       
+        if($formRecette->isSubmitted() && $formRecette->isValid()){
+            $image = $formRecette->get("image")->getData();
+
+            // dd($image);
+            if($image){
+                $nomImage = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $nomImage= str_replace(" ", "_", $nomImage);
+                $nomImage .= "_". uniqid().".".$image->guessExtension();
+                $image->move($this->getParameter('dossier_images'), $nomImage);
+                $recetteAmodifier->setImage($nomImage);
+            } else {
+                $recetteAmodifier->setImage($image_origine);
+            }
+            
+            // $em->persist($recetteAmodifier);
+            $em->flush();
+
+            $id_recette_modif = $session->set('id_recette_modif', []);
+
+
+            $this->addFlash("success", "Les informations de l'recette ont été modifiées");
+            return $this->redirectToRoute("admin_liste_recette");
+
+        }
+        return $this->render("recette/formbackoffice.html.twig", [ 
+            "formRecette" => $formRecette->createView(), 
+            "bouton" => "Modifier",
+            "titre" => "Modification de l'recette n°$id", 
+            "recetteAmodifier" => $recetteAmodifier,
+            "formIngredient" => $formIngredient->createView()
+        ]);
+    }
+
+    /**
      * @Route("/recette/supprimer/{id}", name="recette_supprimer", requirements={"id"="\d+"})
      */
-    public function supprimer(Request $rq, EntityManager $em, RecetteRepository $recette, $id)
+    public function supprimer(
+        Request $rq, 
+        EntityManager $em, 
+        RecetteRepository $recette, $id, 
+        DetailcommandeRepository $detail)
     {
        
         $recette = $recette->find($id);
         $nomrecette = $recette->getTitre();
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($recette);
-        $em->flush();
+        // Verification s'i y a detailcommande en cours
+        $verifDetail = $detail->findByRecette($id);
+        if(!$verifDetail){
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($recette);
+            $em->flush();
+            $this->addFlash('danger', "La recette  \"$nomrecette\"  a bien été supprimé!");
+        } else {
+            $this->addFlash('danger', "Cette recette ne peux pas être supprimé car il y a un ou des commandes en cours");
+        }
 
-        $this->addFlash('danger', "L'utilisateur  \"$nomrecette\"  a bien été supprimé!");
 
-        return $this->redirectToRoute("liste_recette");
+
+        return $this->redirectToRoute("admin_liste_recette");
        
     }
     
@@ -227,8 +323,12 @@ class RecetteController extends AbstractController
     /**
      * @Route("/recette/categorie/modifier/{id}", name="categorie_modifier", requirements={"id"="\d+"})
      */
-    public function modifier_categorie(Request $rq, EntityManager $em, CategorieRepository $categorie, $id)
+    public function modifier_categorie(PackIngredientRepository $ing, Request $rq, EntityManager $em, CategorieRepository $categorie, $id)
     {
+
+
+        
+
         $categorie_modifier = $categorie->find($id);
         $formCategorie = $this->createForm(CategorieType::class, $categorie_modifier);
         $formCategorie->handleRequest($rq);
@@ -298,5 +398,65 @@ class RecetteController extends AbstractController
         return $this->redirectToRoute("ajouter_recette");
     }
 
+
+    /**
+     * @Route("/admin/recette/envente/{id}", name="admin_recette_envente", requirements={"id"="\d+"})
+     */
+    public function mettre_en_vente(Request $rq, EntityManager $em, RecetteRepository $ar, $id)
+    {
+        $recette_en_vente = $ar->find($id);
+        $recette_en_vente->setVente(true);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_liste_recette");
+
+    }
+
+    /**
+     * @Route("/admin/recette/retirer/{id}", name="admin_recette_retirer", requirements={"id"="\d+"})
+     */
+    public function retirer_vente(Request $rq, EntityManager $em, RecetteRepository $ar, $id)
+    {
+        $recette_en_vente = $ar->find($id);
+        $recette_en_vente->setVente(false);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_liste_recette");
+
+    }
+
+    /**
+     * @Route("/admin/recette/ingredient/supprimer/{id}", name="supprimer_ingredient", requirements={"id"="\d+"})
+     */
+    public function supprimer_ingredient(
+            SessionInterface $session, 
+            Request $rq, 
+            EntityManager $em, $id, 
+            PackIngredientRepository $ing,
+            RecetteRepository $rec)
+    {
+        $id_recette_modif = $session->get('id_recette_modif');
+
+        $ingredient = $ing->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($ingredient);
+        $em->flush();
+
+        // recalcul du total
+        $recetteAmodifier = $rec->find($id_recette_modif);
+
+        $PackIngredient = $ing->findByRecette($id_recette_modif);
+        $total = 0;
+        foreach ($PackIngredient as $key => $value){
+            $total = $total + $PackIngredient[$key]->getPrix();
+        }
+        
+        $recetteAmodifier->setPrix($total);
+        $em->flush();
+
+        return $this->redirectToRoute("admin_recette_modifier", ["id"=> $id_recette_modif]);
+
+    }
 
 }

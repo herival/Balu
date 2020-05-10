@@ -15,6 +15,14 @@
 
           </div>
 
+          {% for type, messages in app.flashes %}
+          <div class="alert alert-{{ type }} text-center">
+              {% for message in messages %}
+                  {{ message | raw }}
+              {% endfor %}
+          </div>
+          {% endfor %}
+
           <div class="row tableaudebord">
 
      

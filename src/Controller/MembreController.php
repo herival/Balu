@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Form\MembreType;
 use App\Form\RegistrationFormType;
 use App\Repository\MembreRepository;
+use App\Repository\CommandeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface as EntityManager;
@@ -67,17 +68,23 @@ class MembreController extends AbstractController
     /**
      * @Route("/membre/supprimer/{id}", name="supprimer_membre")
      */
-    public function supprimer(EntityManager $em, Request $request, $id, MembreRepository $membre)
+    public function supprimer(CommandeRepository $com, EntityManager $em, Request $request, $id, MembreRepository $membre)
     {
 
         $membre = $membre->find($id);
         $pseudo = $membre->getPseudo();
+        $commande = $com->findByMembre($id);
+        if(!$commande){
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($membre);
+            $em->flush();
+    
+            $this->addFlash('success', "L'utilisateur  \"$pseudo\"  a bien été supprimé!");
+        } else {
+            $this->addFlash('danger', "Le membre  \"$pseudo\" ne peut pas être supprimé car il a un ou des commande(s) en cours");
+        }
+        
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($membre);
-        $em->flush();
-
-        $this->addFlash('danger', "L'utilisateur  \"$pseudo\"  a bien été supprimé!");
 
         return $this->redirectToRoute("liste_membre");
     }

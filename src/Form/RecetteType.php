@@ -74,6 +74,9 @@ class RecetteType extends AbstractType
                     ]) 
         
             ->add('vente', null)
+              
+                
+            
             // ->add('membre')
         ;
     }

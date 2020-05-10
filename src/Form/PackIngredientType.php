@@ -27,6 +27,7 @@ class PackIngredientType extends AbstractType
             ->add('unite', ChoiceType::class, [
                 "choices"=> [
                     "g"=>"g",
+                    "pcs"=> "pcs",
                     "kg"=>"kg",
                     "litre"=>"litre",
                     "cl"=>"cl",

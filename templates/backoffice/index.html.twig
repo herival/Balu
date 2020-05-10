@@ -39,8 +39,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total des commandes</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">200 €</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Chiffres d'affaires</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{chiffreAffaire}} €</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-euro-sign fa-2x text-gray-300"></i>
@@ -59,7 +59,7 @@
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Nombre de recettes</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">100</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{recette|length}}</div>
                         </div>
                       </div>
                     </div>
@@ -100,12 +100,45 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Les dernières commandes</h6>
            
+
                   
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+
+                    <table class="table table-bordered">
+
+                      <thead class="thead-dark text-uppercase text-center">
+                          <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">Membre</th>
+                              <th scope="col ">Email</th>
+                              <th scope="col">Montant</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Etat</th>
+                              <th scope="col">Action</th>
+      
+                          </tr>
+                      </thead>
+                      <tbody>
+                  
+                       {% for commande in liste_commande %}
+                          <tr>
+                              <td> {{ commande.id }} </td>
+                              <td> {{ commande.membre.pseudo }} </td>
+                              <td> {{ commande.membre.email }} </td>
+                              <td> {{ commande.montant }} € </td>
+                              <td> {{ commande.date |date("d/m/Y") }} </td>
+                              <td> {{ commande.etat }} </td>
+                              <td class="text-center"> <a href="{{path('detail_commande', {'id':commande.id})}}" ><i class="fa fa-eye"></i> </a> </td>
+                          </tr>
+                      {% endfor %} 
+                      </tbody>
+                      
+                  </table>
+
+
                   </div>
                 </div>
               </div>
