@@ -10,6 +10,7 @@ use App\Entity\PackIngredient;
 use App\Form\PackIngredientType;
 use App\Repository\RecetteRepository;
 use App\Repository\CategorieRepository;
+use App\Repository\CommentaireRepository;
 use App\Repository\DetailcommandeRepository;
 use App\Repository\PackIngredientRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,12 +38,16 @@ class RecetteController extends AbstractController
     /**
      * @Route("/recette/fiche/{id}", name="fiche_recette")
      */
-    public function fiche_recette($id, RecetteRepository $ar)
+    public function fiche_recette($id, RecetteRepository $ar, CommentaireRepository $comment)
     { 
+
+        $commentaire_membre = $comment->findByMembre($this->getUser()->getId(), $id);
         $recette = $ar->find($id);
-        dump($recette);
+
+
         return $this->render('recette/ficherecette.html.twig', [
-            'recette' => $recette
+            'recette' => $recette,
+            'commentaire_membre'=> $commentaire_membre
         ]);
     }
 
@@ -303,18 +308,25 @@ class RecetteController extends AbstractController
     /**
      * @Route("/recette/categorie/supprimer/{id}", name="categorie_supprimer", requirements={"id"="\d+"})
      */
-    public function supprimer_categorie(Request $rq, EntityManager $em, CategorieRepository $categorie, $id)
+    public function supprimer_categorie(Request $rq, EntityManager $em, CategorieRepository $categorie, $id, RecetteRepository $rec)
     {
-       
+        $verif_categorie = $rec->findByCategorie($id);
         $categorie_supprimer = $categorie->find($id);
         $nomcategorie = $categorie_supprimer->getCategorie();
-        // dd($nomcategorie);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($categorie_supprimer);
-        $em->flush();
+        if(!$verif_categorie){
 
-        $this->addFlash('danger', "L'utilisateur  \"$nomcategorie\"  a bien été supprimé!");
+            // dd($nomcategorie);
+    
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($categorie_supprimer);
+            $em->flush();
+    
+            $this->addFlash('success', "La categorie \"$nomcategorie\"  a bien été supprimé!");
+        } else {
+            $this->addFlash('danger', "La catégorie \"$nomcategorie\"  ne peut pas être supprimé, elle est afféctée à une ou plusieurs recettes");
+
+        }
 
         return $this->redirectToRoute("categorie_recette");
        

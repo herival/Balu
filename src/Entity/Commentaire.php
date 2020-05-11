@@ -37,6 +37,11 @@ class Commentaire
      */
     private $membre;
 
+    public function __toString() 
+    {
+        return $this->getCommentaire();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
