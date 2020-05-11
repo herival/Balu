@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -74,6 +75,23 @@ class RecetteType extends AbstractType
                     ]) 
         
             ->add('vente', null)
+            ->add('cuisson', TimeType::class, ["widget" => "single_text",
+                                 "label" => "Temps de cuisson",
+                                 'attr' => ['class'=> "text-center"]
+            ]) 
+            ->add('tpspreparation', TimeType::class, ["widget" => "single_text",
+                                   "label" => "Temps de preparation",
+                                  'attr' => ['class'=> "text-center"]
+            ]) 
+            ->add('nbrepersonne', null, ["label" => "Nombre de personne"])
+            ->add('difficulte', ChoiceType::class, [
+                "choices"=> [
+                    "Facile"=>"Facile",
+                    "Intermediaire"=>"Intermediaire",
+                    "Difficile"=>"Difficile",
+                    ]
+                    
+            ])
               
                 
             
