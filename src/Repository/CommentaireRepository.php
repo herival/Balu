@@ -34,6 +34,26 @@ class CommentaireRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    public function findByNote_positif($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.note >= :note')
+            ->setParameter('note', $value)
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findByNote_negatif($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.note < :note')
+            ->setParameter('note', $value)
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     // /**

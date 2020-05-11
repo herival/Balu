@@ -33,7 +33,11 @@
 			{% endfor %}
 			{% if recette.vente == true %}
 			<li class="list-group-item text-center">Prix du Pack Ingredients : {{recette.prix}} € </li>
-			<a href="{{path('ajout_panier', {"id":recette.id})}}" class="btn btn-primary">Acheter le pack</a>
+			{% if app.user %}
+				<a href="{{path('ajout_panier', {"id":recette.id})}}" class="btn btn-primary">Acheter le pack</a>
+				{% else %}
+				<a href="{{path('app_login')}}" class="btn btn-primary">Acheter le pack</a>
+			{% endif %}
 			{% endif %}
 		</ul>
 
@@ -48,10 +52,16 @@
 	<div class="tete-commentaire d-flex justify-content-between mt-3">
 		<h3 class="text-dark">Avis des membres</h3>
 		<div>
+			{% if app.user %}
+			
 				{% if commentaire_membre|length < 1 %}
 					<a href="{{path('ajout_commentaire',{"id":recette.id})}}"class="btn btn-primary btn-sm">Laisser votre avis</a>
 				{% endif %}
-
+			{% else %}
+					
+				<a href="{{path('app_login')}}"class="btn btn-primary btn-sm">Laisser votre avis</a>
+				
+			{% endif %}
 	
 		</div>
 	</div>

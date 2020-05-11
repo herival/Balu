@@ -50,9 +50,10 @@ class MembreController extends AbstractController
         $formMembre->handleRequest($request);
         
         if($formMembre->isSubmitted() && $formMembre->isValid()){
-            $mdp = $up->encodePassword($membre, $formMembre->get("password")->getData());
-            // dd($mdp);
+            $mdp = $formMembre->get("password")->getData();
+         
             if($mdp){
+                $mdp = $up->encodePassword($membre, $formMembre->get("password")->getData());
                 // $mdp = $up->encodePassword($membre, $mdp);
                 $membre->setPassword($mdp);
             }

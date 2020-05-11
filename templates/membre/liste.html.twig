@@ -61,7 +61,7 @@
                             <td> {{ membre.pseudo }} </td> 
                             <td> {{ membre.nom }} </td> 
                             <td> {{ membre.prenom }} </td> 
-                            <td> {{ membre.adresse }} </td> 
+                            <td> {{ membre.adresse }} {{ membre.cp }} {{ membre.ville }}  </td> 
                             <td class="text-center"> {% for role in membre.roles %}  
                                 
                                 {% if role == "ROLE_ADMIN" %}

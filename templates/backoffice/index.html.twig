@@ -78,7 +78,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total des commentaires</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">350</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{commentaire|length}}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -94,7 +94,7 @@
           <div class="row tableaudebord">
 
             <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
+            <div class="col-xl-8 col-lg-12 col-md-12">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -145,7 +145,7 @@
             </div>
 
             <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
+            <div class="col-xl-4 col-lg-12 col-md-12">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -154,6 +154,35 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body commentaire">
+ 
+
+            <table class="table table-bordered">
+
+                <thead class="thead-dark text-uppercase text-center">
+                    <tr>
+                        <th scope="col">Membre</th>
+                        <th scope="col" style="width: 20%;">Recette</th>
+                        <th scope="col">Commentaire</th>
+                        <th scope="col">Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+            
+                 {% for commentaire in commentaire %}
+                <tr>
+                     
+                        <td><a href=""> {{ commentaire.membre.pseudo }} </a></td>
+                        <td> {{ commentaire.recette.titre  }} </td>
+                        <td> {{ commentaire.commentaire|slice(0, 20) }}...</td>
+                        <td class="{{ (commentaire.note > 5) ? 'bg-success' : 'bg-danger' }} text-white"> {{ commentaire.note }}/10 </td>
+                
+
+                     
+                    </tr>
+                  
+                {% endfor %} 
+                </tbody>
+            </table>
 
                 </div>
               </div>

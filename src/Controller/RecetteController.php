@@ -40,8 +40,14 @@ class RecetteController extends AbstractController
      */
     public function fiche_recette($id, RecetteRepository $ar, CommentaireRepository $comment)
     { 
+        
+        if($this->getUser()){
+            $commentaire_membre = $comment->findByMembre($this->getUser()->getId(), $id);
+        } else {
+            $commentaire_membre = array();
 
-        $commentaire_membre = $comment->findByMembre($this->getUser()->getId(), $id);
+        }
+
         $recette = $ar->find($id);
 
 
