@@ -15,11 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommentaireController extends AbstractController
 {
     /**
-     * @Route("/commentaire", name="commentaire")
+     * @Route("/admin/commentaire", name="liste_commentaire")
      */
-    public function index()
+    public function liste_commentaire(CommentaireRepository $comment)
     {
-        return $this->render('commentaire/index.html.twig', [
+        $commentaire = $comment->findAll(); 
+
+        return $this->render('commentaire/listecommentairebo.html.twig', [
             'controller_name' => 'CommentaireController',
         ]);
     }
@@ -52,4 +54,6 @@ class CommentaireController extends AbstractController
             'formCommentaire' => $formCommentaire->createView(),
         ]);
     }
+
+    
 }

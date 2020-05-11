@@ -1,0 +1,63 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Categorie recette
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Gestion commentaires</h1>
+      <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+
+    </div>
+    {% for type, messages in app.flashes %}
+    <div class="alert alert-{{ type }} text-center">
+        {% for message in messages %}
+            {{ message | raw }}
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <div class="row tableaudebord">
+
+
+      <div class="col-lg-6 col-sm-12">
+        <div class="card shadow mb-4">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Tous les commentaires</h6>
+          </div>
+      
+          <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <thead class="thead-dark text-uppercase text-center">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Membre</th>
+                        <th scope="col ">Recette</th>
+                        <th scope="col">Commentaire</th>
+                        <th scope="col">Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+            
+
+                </tbody>
+            </table>
+
+           
+            <a href="{{path('ajouter_categorie')}}" class="btn btn-primary shadow-sm">Ajouter une catégorie</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}

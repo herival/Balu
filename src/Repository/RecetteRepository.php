@@ -32,7 +32,7 @@ class RecetteRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
+
 
     /**
      * @return Recette[] Returns an array of Recette objects
