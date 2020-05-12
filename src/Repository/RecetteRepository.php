@@ -32,7 +32,7 @@ class RecetteRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
+
 
     /**
      * @return Recette[] Returns an array of Recette objects
@@ -48,6 +48,39 @@ class RecetteRepository extends ServiceEntityRepository
         ;
     }
     
+
+    /**
+     * @return Recette[] Returns an array of Recette objects
+     */
+    
+    public function findByTitre($recherche)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.titre LIKE :recherche')
+            ->setParameter('recherche', "%" . $recherche . "%")
+            ->orderBy('r.titre', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Recette[] Returns an array of Recette objects
+     */
+    
+    public function findByIngredient($recherche)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.preparation LIKE :recherche')
+            ->setParameter('recherche', "%" . $recherche . "%")
+            ->orderBy('r.titre', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    
+
     // /**
     //  * @return Recette[] Returns an array of Recette objects
     //  */

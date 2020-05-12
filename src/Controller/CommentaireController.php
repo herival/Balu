@@ -15,15 +15,40 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommentaireController extends AbstractController
 {
     /**
-     * @Route("/commentaire", name="commentaire")
+     * @Route("/admin/commentaire", name="liste_commentaire")
      */
-    public function index()
+    public function liste_commentaire(CommentaireRepository $comment)
     {
-        return $this->render('commentaire/index.html.twig', [
-            'controller_name' => 'CommentaireController',
+        $commentaire = $comment->findAll(); 
+
+        return $this->render('commentaire/listecommentairebo.html.twig', [
+            'commentaire' => $commentaire
         ]);
     }
 
+    /**
+     * @Route("/admin/commentaire/positif", name="commentaire_positif")
+     */
+    public function commentaire_positif(CommentaireRepository $comment)
+    {
+        $commentaire = $comment->findByNote_positif(5); 
+
+        return $this->render('commentaire/listecommentairebo.html.twig', [
+            'commentaire' => $commentaire
+        ]);
+    }
+
+    /**
+     * @Route("/admin/commentaire/negatif", name="commentaire_negatif")
+     */
+    public function commentaire_negatif(CommentaireRepository $comment)
+    {
+        $commentaire = $comment->findByNote_negatif(5); 
+
+        return $this->render('commentaire/listecommentairebo.html.twig', [
+            'commentaire' => $commentaire
+        ]);
+    }
     /**
      * @Route("/commentaire/ajouter/{id}", name="ajout_commentaire")
      */
@@ -52,4 +77,24 @@ class CommentaireController extends AbstractController
             'formCommentaire' => $formCommentaire->createView(),
         ]);
     }
+
+    /**
+     * @Route("/admin/commentaire/supprimer/{id}", name="supprimer_commentaire")
+     */
+    public function supprimer_commentaire($id, CommentaireRepository $comment)
+    {
+        $commentaire = $comment->find($id); 
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($commentaire);
+            $em->flush();
+
+            $this->addFlash('success', "Le commentaire a bien été supprimé!");
+
+
+        return $this->redirectToRoute("liste_commentaire");
+     
+    }
+
+    
 }

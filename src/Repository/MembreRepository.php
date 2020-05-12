@@ -51,7 +51,36 @@ class MembreRepository extends ServiceEntityRepository implements PasswordUpgrad
             ->getResult()
         ;
     }
+
+    /**
+     * @return Membre[] Returns an array of Recette objects
+     */
     
+    public function findByNom($recherche)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.nom LIKE :recherche')
+            ->setParameter('recherche', "%" . $recherche . "%")
+            ->orderBy('m.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    /**
+     * @return Membre[] Returns an array of Recette objects
+     */
+    
+    public function findByPrenom($recherche)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.prenom LIKE :recherche')
+            ->setParameter('recherche', "%" . $recherche . "%")
+            ->orderBy('m.prenom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     // /**
     //  * @return Membre[] Returns an array of Membre objects
