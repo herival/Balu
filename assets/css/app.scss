@@ -2,51 +2,33 @@
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
+
 body {
     background-image: url('../../public/img/1.png');
 }
-
 .none {
     color: rgba(255, 255, 255, 0.267);
 }
-.min-height{
+.content-body{
     min-height: 80vh;
-}
-.content-body {
-    min-height: 80vh;
-}
-.ligne-blanche{
-    height: 2px;
-    background-color: white;
-    width: 100%;
 }
 a.navbar-brand {
     font-family: 'Lobster', cursive;
     font-size: x-large;
 }
-
-a.navbar-brand :hover {
-    color: green;
-}
-.carte-recherche{
-    height: 10vh;
-}
-.bg-trans {
+.bg-trans{
     background-color:rgba(253, 253, 253, 0.479)!important;
 }
-
 // Taille image fiche recette
-.image-recette {
+.image-recette{
     background-size: cover;
     width: 100%;
     height: 40vh;
 }
-
-.image-miniature {
+.image-miniature{
     width: 100%;
     height: 30%
 }
-
 .recettes { 
     // position: relative; 
     // left: 10%; 
@@ -91,7 +73,8 @@ section {
 
 footer {
     background-color: rgb(64, 64, 92);
-    min-height: 20vh;   
+    min-height: 20vh;
+    
 }
 
 footer .fin {
@@ -107,17 +90,6 @@ footer .fin a {
 
 footer .fin a:hover {
     color: red;
-}
-
-footer span {
-    font-family: 'Lobster', cursive;
-    font-size: 1.5em;
-}
-
-footer .icons {
-    display: flex;
-    justify-content: space-evenly;
-    font-size: xx-large;
 }
 
 footer p {
