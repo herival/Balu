@@ -1,47 +1,75 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">BALU !</a>
+  <a class="navbar-brand" href="{{path('accueil')}}">BALU !</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      {# <li class="nav-item active">
-        <a class="nav-link" href="{{ path ("accueil") }}">Accueil <span class="sr-only">(current)</span></a>
-      </li> #}        
-
-      
-          <li class="nav-item">
+    
+          {# <li class="nav-item">
             <a class="nav-link" href="{{ path ("recette") }}">Recettes</a>
-          </li>
+          </li> #}
+
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Catégories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Française</a>
+          <a class="dropdown-item" href="#">Turque</a>
+          <a class="dropdown-item" href="#">Italienne</a>
+          <a class="dropdown-item" href="#">Chinoise</a>
+          <a class="dropdown-item" href="#">Africaine</a>
+          <a class="dropdown-item" href="#">Indienne</a>
+        </div>
+      </li>
+
      
     
 
-  {# {% if is_granted("IS_AUTHENTICATED_FULLY") %} #}
+  {% if is_granted("IS_AUTHENTICATED_FULLY") %}
   
     <li class="nav-item">
-        <a class="nav-link" href="{#{{ path ("app_logout") }}#}">
+      <a class="nav-link" href="{{ path ("ajouter_recette") }}">Ajouter Recettes</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path ("panier") }}">
+        Panier</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_logout')}}">
         <i class="fa fa-sign-out-alt"></i>
         Deconnexion</a>
       </li>
 
-    {# {% else %} #}
+
+
+  {% else %}
 
       <li class="nav-item">
-        <a class="nav-link" href="{#{{ path ("app_login") }}#}">
+        <a class="nav-link" href="{{path('app_login')}}">
         <i class="fa fa-sign-in-alt"></i>
         Connexion</a>
       </li>
 
 
      <li class="nav-item">
-        <a class="nav-link" href="{#{{ path ("app_register") }}#}">
+        <a class="nav-link" href="{{ path('app_register')}}">
         <i class="fa fa-sign-user-plus"></i>
         Inscription</a>
       </li>
-
-      {# {% endif %} #}
-
+    
+  {% endif %}
+  
+  {% if is_granted("ROLE_ADMIN") %} 
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path ("backoffice") }}">
+        BackOffice</a>
+      </li>
+  {% endif %}
 
      
     </ul>
