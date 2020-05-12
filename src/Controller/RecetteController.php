@@ -399,7 +399,19 @@ class RecetteController extends AbstractController
         $formCategorie = $this->createForm(CategorieType::class, $categorie_modifier);
         $formCategorie->handleRequest($rq);
         if($formCategorie->isSubmitted() && $formCategorie->isValid()){
-            // $em->persist($categorie_modifier);
+           
+
+            $image = $formCategorie->get("image")->getData();
+
+            if($image){
+                $nomImage = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $nomImage= str_replace(" ", "_", $nomImage);
+                $nomImage .= "_". uniqid().".".$image->guessExtension();
+                $image->move($this->getParameter('dossier_images'), $nomImage);
+                $categorie_modifier->setImage($nomImage);
+            }
+            $em->persist($categorie_modifier);
+
             $em->flush();
             $this->addFlash("success", "La catégorie à bien été modifié");
             return $this->redirectToRoute("categorie_recette");
