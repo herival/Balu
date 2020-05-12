@@ -32,6 +32,19 @@ class RecetteRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    /**
+     * @return Recette[] Returns an array of Recette objects
+     */
+
+    public function findByCategorie($value)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.categorie = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
     // /**
     //  * @return Recette[] Returns an array of Recette objects
