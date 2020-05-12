@@ -11,22 +11,19 @@
             <a class="nav-link" href="{{ path ("recette") }}">Recettes</a>
           </li> #}
 
-<li class="nav-item dropdown">
+          <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Catégories
+          Recettes
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Française</a>
-          <a class="dropdown-item" href="#">Turque</a>
           <a class="dropdown-item" href="#">Italienne</a>
-          <a class="dropdown-item" href="#">Chinoise</a>
+          <a class="dropdown-item" href="#">Turque</a>
           <a class="dropdown-item" href="#">Africaine</a>
+          <a class="dropdown-item" href="#">Chinoise</a>
           <a class="dropdown-item" href="#">Indienne</a>
         </div>
       </li>
-
-     
-    
 
   {% if is_granted("IS_AUTHENTICATED_FULLY") %}
   
@@ -39,41 +36,54 @@
         Panier</a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_logout')}}">
-        <i class="fa fa-sign-out-alt"></i>
-        Deconnexion</a>
-      </li>
-
-
-
-  {% else %}
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{path('app_login')}}">
-        <i class="fa fa-sign-in-alt"></i>
-        Connexion</a>
-      </li>
-
-
-     <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_register')}}">
-        <i class="fa fa-sign-user-plus"></i>
-        Inscription</a>
-      </li>
-    
   {% endif %}
-  
-  {% if is_granted("ROLE_ADMIN") %} 
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path ("backoffice") }}">
-        BackOffice</a>
-      </li>
-  {% endif %}
-
-     
+   
     </ul>
-    <form class="form-inline my-2 my-lg-0" action="{#{{ path ("search") }}#}">
+
+
+    <ul class="navbar-nav">
+        {% if is_granted("ROLE_ADMIN") %} 
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path ("backoffice") }}">
+            <i class="fa fa-cog"></i>
+            BackOffice</a>
+        </li>
+        {% endif %}
+        {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+
+            <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_register')}}">
+            <i class="fa fa-user-plus"></i>
+            Inscription</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_login')}}">
+          <i class="fa fa-sign-in-alt"></i>
+          Connexion</a>
+        </li>
+
+        {% endif %}
+
+
+        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_logout')}}">
+          <i class="fa fa-sign-out-alt"></i>
+          Deconnexion</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+          <i class="fa fa-user"></i>
+          {{app.user.Pseudo|capitalize}}</a>
+        </li>
+
+
+        {% endif %}
+
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0" action="{{ path ("recherche") }}" method="GET">
       <input class="form-control mr-sm-2" name="mot" type="search" placeholder="Recherche.." aria-label="Search" required>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
     </form>
