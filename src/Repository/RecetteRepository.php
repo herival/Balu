@@ -46,6 +46,19 @@ class RecetteRepository extends ServiceEntityRepository
         ;
     }
     
+    public function findByIngredient($recherche)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.preparation LIKE :recherche')
+            ->setParameter('recherche', "%" . $recherche . "%")
+            ->orderBy('r.titre', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    
+
     // /**
     //  * @return Recette[] Returns an array of Recette objects
     //  */

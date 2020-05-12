@@ -79,6 +79,26 @@ class Recette
      */
     private $packIngredients;
 
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $cuisson;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $tpspreparation;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbrepersonne;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $difficulte;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -308,6 +328,54 @@ class Recette
                 $packIngredient->setRecette(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCuisson(): ?\DateTimeInterface
+    {
+        return $this->cuisson;
+    }
+
+    public function setCuisson(?\DateTimeInterface $cuisson): self
+    {
+        $this->cuisson = $cuisson;
+
+        return $this;
+    }
+
+    public function getTpspreparation(): ?\DateTimeInterface
+    {
+        return $this->tpspreparation;
+    }
+
+    public function setTpspreparation(?\DateTimeInterface $tpspreparation): self
+    {
+        $this->tpspreparation = $tpspreparation;
+
+        return $this;
+    }
+
+    public function getNbrepersonne(): ?int
+    {
+        return $this->nbrepersonne;
+    }
+
+    public function setNbrepersonne(?int $nbrepersonne): self
+    {
+        $this->nbrepersonne = $nbrepersonne;
+
+        return $this;
+    }
+
+    public function getDifficulte(): ?string
+    {
+        return $this->difficulte;
+    }
+
+    public function setDifficulte(?string $difficulte): self
+    {
+        $this->difficulte = $difficulte;
 
         return $this;
     }
