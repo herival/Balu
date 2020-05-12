@@ -3,9 +3,23 @@
 {% block title %}Commentaire{% endblock %}
 
 {% block body %}
+
+<style>
+    .titre {font-family: 'Lobster', cursive; color: #f6e58d; }
+    .sous-titre {color: yellow; }
+</style>
+
+<div class="titre display-4 text-center">
+    {% block h1%}Vos impressions{% endblock %}
+</div>
+
+<div class="sous-titre col-md-6 mx-auto">
     {{ form_start(formCommentaire) }}
         {{ form_widget(formCommentaire) }}
-        <button class="btn btn-primary shadow"type="submit">Envoyer</button>
+        <div class="text-center mt-4 mb-4">
+            <input type="submit" class="btn btn-lg btn-success" value="Envoyer">
+        </div>
     {{ form_end(formCommentaire) }}
+</div>
 
 {% endblock %}

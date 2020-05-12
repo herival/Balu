@@ -26,18 +26,17 @@
 		<ul class="list-group col-lg-4 mb-2">
 			<li class="list-group-item list-group-item-info">Nous avons besoin de :</li>
 			{% for ingredient in recette.packIngredients %}
-
-			<li class="list-group-item"><i class="fa fa-check" aria-hidden="true"></i>
-				{{ ingredient.quantite }} {{ ingredient.unite }} -> {{ ingredient.libelle }} 
-			</li>
+				<li class="list-group-item"><i class="fa fa-check" aria-hidden="true"></i>
+					{{ ingredient.quantite }} {{ ingredient.unite }} -> {{ ingredient.libelle }} 
+				</li>
 			{% endfor %}
-			{% if recette.vente == true %}
-			<li class="list-group-item text-center">Prix du Pack Ingredients : {{recette.prix}} € </li>
-			{% if app.user %}
-				<a href="{{path('ajout_panier', {"id":recette.id})}}" class="btn btn-primary">Acheter le pack</a>
-				{% else %}
-				<a href="{{path('app_login')}}" class="btn btn-primary">Acheter le pack</a>
-			{% endif %}
+				{% if recette.vente == true %}
+					<li class="list-group-item text-center">Prix du Pack Ingredients : {{recette.prix}} € </li>
+					{% if app.user %}
+						<a href="{{path('ajout_panier', {"id":recette.id})}}" class="btn btn-primary">Acheter le pack</a>
+					{% else %}
+						<a href="{{path('app_login')}}" class="btn btn-primary">Acheter le pack</a>
+				{% endif %}
 			{% endif %}
 		</ul>
 
