@@ -9,11 +9,17 @@ body {
 .none {
     color: rgba(255, 255, 255, 0.267);
 }
-
+.min-height{
+    min-height: 80vh;
+}
 .content-body {
     min-height: 80vh;
 }
-
+.ligne-blanche{
+    height: 2px;
+    background-color: white;
+    width: 100%;
+}
 a.navbar-brand {
     font-family: 'Lobster', cursive;
     font-size: x-large;
@@ -22,7 +28,9 @@ a.navbar-brand {
 a.navbar-brand :hover {
     color: green;
 }
-
+.carte-recherche{
+    height: 10vh;
+}
 .bg-trans {
     background-color:rgba(253, 253, 253, 0.479)!important;
 }

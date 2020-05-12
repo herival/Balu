@@ -115,7 +115,7 @@ class MembreController extends AbstractController
     }
 
     /**
-     * @Route("/membre/liste_membre", name="liste_membre_membre")
+     * @Route("/admin/membre/liste_membre", name="liste_membre_membre")
      */
     public function liste_membre_membre(MembreRepository $membre)
     {
@@ -125,5 +125,27 @@ class MembreController extends AbstractController
             'liste_membre' => $liste_membre,
         ]);
     }
+
+    /**
+     * @Route("/admin/membre/membre_recherche", name="recherche_membre_admin")
+     */
+    public function recherche_membre_admin(Request $request, MembreRepository $membre)
+    {
+        $motRecherche = $request->query->get("nom");
+        $motRecherche = trim($motRecherche); 
+
+        if($motRecherche){
+    
+            $liste_membre = $membre->findByNom($motRecherche);
+            $liste_prenom = $membre->findByPrenom($motRecherche);
+        }
+  
+
+        return $this->render('membre/recherchemembrebo.html.twig', [
+            'liste_membre' => $liste_membre,
+            'liste_prenom'=> $liste_prenom
+        ]);
+    }
+
 
 }

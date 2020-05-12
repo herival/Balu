@@ -83,6 +83,37 @@
                             </td> 
                         </tr>
                     {% endfor %} 
+                            {% for membre in liste_prenom %}
+                            <tr>
+                                <td> {{ membre.id }} </td>
+                                <td> {{ membre.email }} </td> 
+                            
+                                
+                                
+                                <td> {{ membre.pseudo }} </td> 
+                                <td> {{ membre.nom }} </td> 
+                                <td> {{ membre.prenom }} </td> 
+                                <td> {{ membre.adresse }} {{ membre.cp }} {{ membre.ville }}  </td> 
+                                <td class="text-center"> {% for role in membre.roles %}  
+                                    
+                                    {% if role == "ROLE_ADMIN" %}
+                                        Admin
+                                    {% elseif role == "ROLE_USER" %}
+                                        Membre
+                                    {% else %}
+                                        Contributeur
+                                    {% endif %} 
+                                    
+                                    {% endfor %}
+                                </td> 
+                                <td class="text-center"> 
+                                    <a href="{{ path('fiche_membre', {"id":membre.id}) }}"><i class="fa fa-eye"></i> </a>
+                                    <a href="{{ path('modifier_membre', {"id":membre.id}) }}"><i class="fa fa-edit"></i></a> 
+                                    <a href="{{ path('supprimer_membre', {"id":membre.id}) }}" onclick="return confirm('Voulez-vous supprimer cet utilisateur?')" class="text-danger"> <i class="fa fa-trash"></i> </a> 
+                                
+                                </td> 
+                            </tr>
+                {% endfor %} 
                     </tbody>
                   </table>                   
                 </div>

@@ -9,7 +9,20 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800">Recettes</h1>
+        <div>
+            <Label>Selectionner une categorie</Label>
+            <select  class="form-control" name="page" onchange="window.location=this.value">
+                <option value="{{path('admin_liste_recette')}}">Toutes les categories</option>
+                {% for categorie in categorie %}
+                     <option value="{{path('recette_backoffice_recherche',{"id":categorie.id})}}" {% if id is defined %} {{ (categorie.id == id) ? 'selected'}} {% endif %} > {{ categorie.categorie }}</option>
+                {% endfor %}
+        
+            </select>
+        </div>
+
       <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+        
 
 
     </div>
@@ -74,19 +87,28 @@
                            
                             <td class="text-center"> {% if recette.vente == true %}
                                     En vente
-                                    <a href="{{ path("admin_recette_retirer", { id: recette.id }) }}" class="btn btn-sm btn-danger col-12">Retirer</a>
+                                        {% if id is defined %}
+                                            <a href="{{ path("admin_recette_retirercat", { "id": recette.id, "id_cat":id }) }}" class="btn btn-sm btn-danger col-12">Retirer</a>
+                                        {% else %}
+                                            <a href="{{ path("admin_recette_retirer", { "id": recette.id }) }}" class="btn btn-sm btn-danger col-12">Retirer</a>
+                                        {% endif %}
                                     {% else %}
                                     Pas en vente
-                                    <a href="{{ path("admin_recette_envente", { id: recette.id }) }}" class="btn btn-sm btn-success col-12 ">Vendre</a>
+                                        {% if id is defined %}
+                                            <a href="{{ path("admin_recette_enventecat", { "id": recette.id , "id_cat":id }) }}" class="btn btn-sm btn-success col-12 ">Vendre</a>
+
+                                        {% else %}
+                                            <a href="{{ path("admin_recette_envente", { "id": recette.id }) }}" class="btn btn-sm btn-success col-12 ">Vendre</a>
+                                        {% endif %}
                                 {% endif %}</td>
                             <td class="text-right">{{ recette.prix }} € </td>
                             <td class="text-center">
                                 </a>
-                                <a href="{{ path("admin_recette_modifier", { id: recette.id }) }}">
+                                <a href="{{ path("admin_recette_modifier", { "id": recette.id }) }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
         
-                                <a class="text-danger" onclick="return confirm('Voulez-vous supprimer cette recette?')" href="{{ path("recette_supprimer", { id: recette.id }) }}">
+                                <a class="text-danger" onclick="return confirm('Voulez-vous supprimer cette recette?')" href="{{ path("recette_supprimer", { "id": recette.id }) }}">
                                     <i class="fa fa-trash"></i>
                                 </a>
         

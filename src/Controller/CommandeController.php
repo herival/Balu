@@ -156,5 +156,6 @@ class CommandeController extends AbstractController
         return $this->redirectToRoute("liste_commande");
 
     }
+    
 
 }
