@@ -98,3 +98,14 @@ footer p {
     height: 50px;
     padding: 10px;
 }
+
+span {
+    font-family: 'Lobster', cursive;
+    font-size: xx-large;
+}
+
+footer .icons {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: xx-large;
+}
