@@ -62,6 +62,21 @@ class CommandeRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Commande[] Returns an array of Commande objects
+     */
+    
+    public function findByEtat($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.etat = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
     // /**
     //  * @return Commande[] Returns an array of Commande objects

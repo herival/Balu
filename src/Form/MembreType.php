@@ -44,6 +44,9 @@ class MembreType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
+            ->add('cp')
+            ->add('ville')
+            
         ;
     }
 

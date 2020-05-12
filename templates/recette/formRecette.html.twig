@@ -7,7 +7,7 @@
 <div class="container">
 	<h1>Nouvelle recette</h1>
 
-    <div class="col-lg-6 mx-auto text-dark bg-trans rounded-lg ">
+    <div class="col-lg-8 mx-auto text-dark bg-trans rounded-lg ">
 	{{ form_start(formRecette) }}
         {{ form_row(formRecette.categorie) }}
         {{ form_row(formRecette.titre) }}
@@ -17,6 +17,21 @@
         {{ form_row(formRecette.preparation) }}
        
         <div hidden>{{ form_row(formRecette.vente) }}</div>
+
+        <div class="form-row">
+            <div class="col-lg-3">
+                {{ form_row(formRecette.cuisson) }}
+            </div>
+            <div class="col-lg-3">
+                {{ form_row(formRecette.tpspreparation) }}
+            </div>
+            <div class="col-lg-3">
+                {{ form_row(formRecette.nbrepersonne) }}
+            </div>
+            <div class="col-lg-3">
+                {{ form_row(formRecette.difficulte) }}
+            </div>
+        </div>
 
         <button type="submit" class="btn btn-primary shadow mb-2">Enregistrer</button>
     </div>

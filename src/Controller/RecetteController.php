@@ -10,6 +10,7 @@ use App\Entity\PackIngredient;
 use App\Form\PackIngredientType;
 use App\Repository\RecetteRepository;
 use App\Repository\CategorieRepository;
+use App\Repository\CommentaireRepository;
 use App\Repository\DetailcommandeRepository;
 use App\Repository\PackIngredientRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,26 +38,73 @@ class RecetteController extends AbstractController
     /**
      * @Route("/recette/fiche/{id}", name="fiche_recette")
      */
-    public function fiche_recette($id, RecetteRepository $ar)
+    public function fiche_recette($id, RecetteRepository $ar, CommentaireRepository $comment)
     { 
+        
+        if($this->getUser()){
+            $commentaire_membre = $comment->findByMembre($this->getUser()->getId(), $id);
+        } else {
+            $commentaire_membre = array();
+
+        }
+
         $recette = $ar->find($id);
-        dump($recette);
+
+
         return $this->render('recette/ficherecette.html.twig', [
-            'recette' => $recette
+            'recette' => $recette,
+            'commentaire_membre'=> $commentaire_membre
         ]);
     }
 
-    /**
-     * @Route("/admin/recette", name="recette_backoffice")
+    // /**
+    //  * @Route("/admin/recette", name="liste_recette_admin")
+    //  */
+    // public function recette_backoffice(SessionInterface $session, RecetteRepository $ar, CategorieRepository $cat)
+    // { 
+    //     $categorie = $cat->findAll();
+    //     $liste_recettes = $ar->findAll();
+
+    //     $id_recette_modif = $session->set('id_recette_modif', []);
+
+    //     return $this->render('recette/indexbackoffice.html.twig', [
+    //         'liste_recettes' => $liste_recettes,
+    //         'categorie'=> $categorie
+    //     ]);
+    // }
+
+       /**
+     * @Route("/admin/recette/liste", name="admin_liste_recette")
      */
-    public function recette_backoffice(SessionInterface $session, RecetteRepository $ar)
-    { 
-        $liste_recettes = $ar->findAll();
+    public function liste_recette_backoffice(RecetteRepository $recette, CategorieRepository $cat, SessionInterface $session)
+    {
+        $liste_recettes = $recette->findAll();
+        $categorie = $cat->findAll();
 
         $id_recette_modif = $session->set('id_recette_modif', []);
 
+
         return $this->render('recette/indexbackoffice.html.twig', [
-            'liste_recettes' => $liste_recettes
+            'liste_recettes' => $liste_recettes,
+            'categorie'=> $categorie,
+        ]);
+
+        
+    }
+
+    /**
+     * @Route("/admin/recette/categorie/{id}", name="recette_backoffice_recherche")
+     */
+    public function recette_backoffice_recherche($id, SessionInterface $session, RecetteRepository $ar, CategorieRepository $cat)
+    { 
+        $liste_recettes = $ar->findByCategorie($id);
+        $categorie = $cat->findAll();
+
+
+        return $this->render('recette/indexbackoffice.html.twig', [
+            'liste_recettes' => $liste_recettes, 
+            'categorie'=> $categorie,
+            'id'=>$id
         ]);
     }
 
@@ -102,19 +150,7 @@ class RecetteController extends AbstractController
     );
     }
 
-    /**
-     * @Route("/admin/recette/liste", name="admin_liste_recette")
-     */
-    public function liste_recette(RecetteRepository $recette)
-    {
-        $liste_recettes = $recette->findAll();
-
-        return $this->render('recette/indexbackoffice.html.twig', [
-            'liste_recettes' => $liste_recettes,
-        ]);
-
-        
-    }
+ 
      /**
      * @Route("/fiche/recette/{id}", name="recette_fiche", requirements={"id"="\d+"})
      * à cause de requirements, id doit être composé d'1 ou plusieurs chiffres 
@@ -142,7 +178,7 @@ class RecetteController extends AbstractController
         if($formRecette->isSubmitted() && $formRecette->isValid()){
             $em->persist($recetteAmodifier);
             $em->flush();
-            $this->addFlash("success", "Les informations de l'recette ont été modifiées");
+            $this->addFlash("success", "Les informations de la recette ont été modifiées");
             return $this->redirectToRoute("recette");
         }
         return $this->render("recette/formRecette.html.twig", [ 
@@ -219,7 +255,7 @@ class RecetteController extends AbstractController
             $id_recette_modif = $session->set('id_recette_modif', []);
 
 
-            $this->addFlash("success", "Les informations de l'recette ont été modifiées");
+            $this->addFlash("success", "Les informations de la recette ont été modifiées");
             return $this->redirectToRoute("admin_liste_recette");
 
         }
@@ -289,6 +325,15 @@ class RecetteController extends AbstractController
 
         if($formCategorie->isSubmitted() && $formCategorie->isValid()){
 
+            $image = $formCategorie->get("image")->getData();
+
+            if($image){
+                $nomImage = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $nomImage= str_replace(" ", "_", $nomImage);
+                $nomImage .= "_". uniqid().".".$image->guessExtension();
+                $image->move($this->getParameter('dossier_images'), $nomImage);
+                $nouvelle_categorie->setImage($nomImage);
+            }
             $em->persist($nouvelle_categorie);
             $em->flush();
 
@@ -303,18 +348,25 @@ class RecetteController extends AbstractController
     /**
      * @Route("/recette/categorie/supprimer/{id}", name="categorie_supprimer", requirements={"id"="\d+"})
      */
-    public function supprimer_categorie(Request $rq, EntityManager $em, CategorieRepository $categorie, $id)
+    public function supprimer_categorie(Request $rq, EntityManager $em, CategorieRepository $categorie, $id, RecetteRepository $rec)
     {
-       
+        $verif_categorie = $rec->findByCategorie($id);
         $categorie_supprimer = $categorie->find($id);
         $nomcategorie = $categorie_supprimer->getCategorie();
-        // dd($nomcategorie);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($categorie_supprimer);
-        $em->flush();
+        if(!$verif_categorie){
 
-        $this->addFlash('danger', "L'utilisateur  \"$nomcategorie\"  a bien été supprimé!");
+            // dd($nomcategorie);
+    
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($categorie_supprimer);
+            $em->flush();
+    
+            $this->addFlash('success', "La categorie \"$nomcategorie\"  a bien été supprimé!");
+        } else {
+            $this->addFlash('danger', "La catégorie \"$nomcategorie\"  ne peut pas être supprimé, elle est afféctée à une ou plusieurs recettes");
+
+        }
 
         return $this->redirectToRoute("categorie_recette");
        
@@ -411,6 +463,18 @@ class RecetteController extends AbstractController
         return $this->redirectToRoute("admin_liste_recette");
 
     }
+    /**
+     * @Route("/admin/recette/envente_retourcategorie/{id}/{id_cat}", name="admin_recette_enventecat", requirements={"id"="\d+"})
+     */
+    public function mettre_en_ventecat(Request $rq, EntityManager $em, RecetteRepository $ar, $id, $id_cat)
+    {
+        $recette_en_vente = $ar->find($id);
+        $recette_en_vente->setVente(true);
+        $em->flush();
+
+        return $this->redirectToRoute("recette_backoffice_recherche", ["id"=>$id_cat]);
+
+    }
 
     /**
      * @Route("/admin/recette/retirer/{id}", name="admin_recette_retirer", requirements={"id"="\d+"})
@@ -422,6 +486,19 @@ class RecetteController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute("admin_liste_recette");
+
+    }
+    
+    /**
+     * @Route("/admin/recette/retirer_retourcategorie/{id}/{id_cat}", name="admin_recette_retirercat", requirements={"id"="\d+"})
+     */
+    public function retirer_ventecat(Request $rq, EntityManager $em, RecetteRepository $ar, $id, $id_cat)
+    {
+        $recette_en_vente = $ar->find($id);
+        $recette_en_vente->setVente(false);
+        $em->flush();
+
+        return $this->redirectToRoute("recette_backoffice_recherche", ["id"=>$id_cat]);
 
     }
 

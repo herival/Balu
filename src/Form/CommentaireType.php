@@ -2,30 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Categorie;
+use App\Entity\Commentaire;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class CategorieType extends AbstractType
+class CommentaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('categorie')
-            ->add('image', FileType::class, [
-                'label'=> 'ajoutez une image',
-                'data_class' => null,
-                "required" => false
-            ])
+            ->add('note', ChoiceType::class, [ 'choices' => [0, 1 , 2, 3, 4, 5, 6, 7, 8, 9, 10] ])
+            ->add('commentaire')
+      
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Categorie::class,
+            'data_class' => Commentaire::class,
         ]);
     }
 }
