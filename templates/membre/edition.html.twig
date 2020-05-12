@@ -1,0 +1,60 @@
+
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Membre{% endblock %}
+
+{% block body %}
+
+      
+        <div class="container-fluid">
+
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Membres</h1>
+            <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+          </div>
+
+          <div class="row tableaudebord">
+
+     
+            <div class="col-12">
+              <div class="card shadow mb-4">
+       
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Modification membre</h6>
+                </div>
+            
+                <div class="card-body">
+     
+                    {{ form_start(formMembre) }}
+                    
+                    {{ form_row(formMembre.nom) }}
+                    {{ form_row(formMembre.prenom) }}
+                    {{ form_row(formMembre.email) }}
+                    {{ form_row(formMembre.password) }}
+                    {{ form_row(formMembre.roles) }}
+                
+                    {{ form_row(formMembre.Pseudo) }}
+                    {{ form_row(formMembre.adresse) }}
+                    <div class="row">
+
+                        <div class="col-4">{{ form_row(formMembre.cp) }}</div>
+                        <div class="col-8">{{ form_row(formMembre.ville) }}</div>
+                    </div>
+                
+                
+                
+                    <button class="btn btn-primary shadow-sm" type="submit">Modifier</button>
+                    <a href="{{ path('liste_membre') }} " class="btn btn-primary">Annuler</a>
+                    {#
+                    <a href="{{ path('supprimer_membre', {"id":membre.id}) }}" onclick="return confirm('Voulez-vous supprimer cet utilisateur?')" class="btn btn-danger">Supprimer le membre!</a> 
+                    #}
+                
+                    {{ form_end(formMembre) }}
+                </div>
+                  
+
+                </div>
+              </div>
+            </div>
+          </div>
+{% endblock %}

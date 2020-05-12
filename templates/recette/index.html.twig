@@ -1,41 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recettes{% endblock %}
+{% block title %}Fiche recette
+{% endblock %}
 
 {% block body %}
-<h1>Recettes</h1>
+<div class="container bg-trans">
+    <h1>Toutes les recettes</h1>
 
-<table class="table table-bordered">
+    {% for recette in liste_recettes %}
+        
+    <div class="row bg-trans rounded-lg mt-2 mb-2">
+        <div class="col-3">
+            <img class="card-img-top" src="{{ asset("img/" ~ recette.image )}}" alt="Card image cap">
+        </div>
+        
+        <div class="col-8">
+            
+            <h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
+            <p class="card-text text-dark">{{recette.description}}</p>
+            <a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2">Voir la recette</a>
+            
+        </div>
+    </div>
+    
+    {% endfor %}
 
-    <thead class="thead-dark text-uppercase">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Titre</th>
-            <th scope="col ">description</th>
-            <th scope="col">image</th>
-            <th scope="col">categorie</th>
-            <th scope="col" >preparation</th>
-        </tr>
-    </thead>
-    <tbody>
-
-     {% for recette in liste_recettes %}
-        <tr>
-            <td> {{ recette.id }} </td>
-            <td> {{ recette.description }} </td> 
-            <td> {{ recette.image }} </td> 
-            <td> {{ recette.categorie.categorie }} </td> 
-            <td> {{ recette.preparation }} </td> 
-        </tr>
-    {% endfor %} 
-    </tbody>
-
-
-
-
-
-
-</table>
+</div>
 
 
 {% endblock %}

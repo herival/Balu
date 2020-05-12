@@ -1,26 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle Recette{% endblock %}
+{% block title %}Nouvelle Recette
+{% endblock %}
 
 {% block body %}
-<h1>Nouvelle recette</h1>
+<div class="container">
+	<h1>Nouvelle recette</h1>
 
-{{ form_start(formRecette) }}
-    {{ form_row(formRecette.titre) }}
-    {{ form_row(formRecette.description) }}
-    {{ form_row(formRecette.image) }}
-    {{ form_row(formRecette.categorie) }}
-    {{ form_row(formRecette.preparation) }}
-    {# 
-    {{ form_row(formRecette.pack_ingredient) }}
-    {{ form_row(formRecette.membre) }}
-#}   
-    
- 
+    <div class="col-lg-8 mx-auto text-dark bg-trans rounded-lg ">
+	{{ form_start(formRecette) }}
+        {{ form_row(formRecette.categorie) }}
+        {{ form_row(formRecette.titre) }}
+        {{ form_row(formRecette.description) }}
+        {{ form_row(formRecette.image) }}
 
+        {{ form_row(formRecette.preparation) }}
+       
+        <div hidden>{{ form_row(formRecette.vente) }}</div>
 
-<button type="submit" class="btn btn-primary">Enregistrer</button>
-{{ form_end(formRecette) }}
+        <div class="form-row">
+            <div class="col-lg-3">
+                {{ form_row(formRecette.cuisson) }}
+            </div>
+            <div class="col-lg-3">
+                {{ form_row(formRecette.tpspreparation) }}
+            </div>
+            <div class="col-lg-3">
+                {{ form_row(formRecette.nbrepersonne) }}
+            </div>
+            <div class="col-lg-3">
+                {{ form_row(formRecette.difficulte) }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary shadow mb-2">Enregistrer</button>
+    </div>
+    {{ form_end(formRecette) }}
+</div>
 
 
 {% endblock %}

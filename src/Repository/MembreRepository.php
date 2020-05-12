@@ -36,6 +36,52 @@ class MembreRepository extends ServiceEntityRepository implements PasswordUpgrad
         $this->_em->flush();
     }
 
+    /**
+     * @return Membre[] Returns an array of Membre objects
+     */
+    
+    public function findByRoles($value)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.roles = :val')
+            ->setParameter('val', $value)
+            ->orderBy('m.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Membre[] Returns an array of Recette objects
+     */
+    
+    public function findByNom($recherche)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.nom LIKE :recherche')
+            ->setParameter('recherche', "%" . $recherche . "%")
+            ->orderBy('m.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    /**
+     * @return Membre[] Returns an array of Recette objects
+     */
+    
+    public function findByPrenom($recherche)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.prenom LIKE :recherche')
+            ->setParameter('recherche', "%" . $recherche . "%")
+            ->orderBy('m.prenom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Membre[] Returns an array of Membre objects
     //  */
@@ -64,4 +110,17 @@ class MembreRepository extends ServiceEntityRepository implements PasswordUpgrad
         ;
     }
     */
+         /**
+     * @return Record[] Returns an array of Record objects
+     */
+    public function findRecord()
+    {
+        // SELECT a.* FROM artist WHERE name = "% . $recherche . %"
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.releasedAt', 'DESC')
+            ->setMaxResults(9)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

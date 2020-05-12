@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche recette
+{% endblock %}
+
+{% block body %}
+<div class="container bg-trans">
+	<h1>Fiche recette</h1>
+	{% set urls = asset("img/")  %}
+	
+	<h2 class="text-dark">{{ recette.titre}} </h2>
+
+	<div style="width:100%; height:50vh; overflow:hidden">
+		<img src="{{ urls ~ recette.image }}" style="width:100%; margin: 0 0;"/>
+	</div>
+
+
+	<p class="bg-light p-2"> {{ recette.description }}</p>
+
+	<h3 class="alert text-dark">Publié par {{ recette.membre.Pseudo |capitalize}}</h3>
+
+
+
+
+	<div class="row mt-2">
+		<ul class="list-group col-lg-4 mb-2">
+			<li class="list-group-item list-group-item-info">Nous avons besoin de :</li>
+			{% for ingredient in recette.packIngredients %}
+
+			<li class="list-group-item"><i class="fa fa-check" aria-hidden="true"></i>
+				{{ ingredient.quantite }} {{ ingredient.unite }} -> {{ ingredient.libelle }} 
+			</li>
+			{% endfor %}
+			{% if recette.vente == true %}
+			<li class="list-group-item text-center">Prix du Pack Ingredients : {{recette.prix}} € </li>
+			{% if app.user %}
+				<a href="{{path('ajout_panier', {"id":recette.id})}}" class="btn btn-primary">Acheter le pack</a>
+				{% else %}
+				<a href="{{path('app_login')}}" class="btn btn-primary">Acheter le pack</a>
+			{% endif %}
+			{% endif %}
+		</ul>
+
+		<ul class="list-group col-lg-8 ">
+			<li class="list-group-item list-group-item-info">Preparation </li>
+			<li class="list-group-item">{{ recette.preparation }}</li>
+		</ul>
+
+	</div>
+
+	<!-- Commentaire  -->
+	<div class="tete-commentaire d-flex justify-content-between mt-3">
+		<h3 class="text-dark">Avis des membres</h3>
+		<div>
+			{% if app.user %}
+			
+				{% if commentaire_membre|length < 1 %}
+					<a href="{{path('ajout_commentaire',{"id":recette.id})}}"class="btn btn-primary btn-sm">Laisser votre avis</a>
+				{% endif %}
+			{% else %}
+					
+				<a href="{{path('app_login')}}"class="btn btn-primary btn-sm">Laisser votre avis</a>
+				
+			{% endif %}
+	
+		</div>
+	</div>
+	<div class="card-body bg-trans rounded mb-2 ">
+
+		{% for commentaire in recette.commentaires %}
+			
+		<div class="row">
+			<div class="col-12 mb-2">
+				<p>
+				<strong>{{commentaire.membre.Pseudo |capitalize}}</strong> Note :
+					{% if commentaire.note > 5 %}
+					<span class="badge badge-success">{{ commentaire.note}} /10</span> 
+					{% else %}
+					<span class="badge badge-danger">{{ commentaire.note}} /10</span> 
+						
+					{% endif %}
+				</p>
+				<p>{{commentaire.commentaire}}</p>
+
+			</div>
+		</div>
+
+		{% endfor %}
+
+
+
+
+	</div>
+
+</div>
+
+
+{% endblock %}

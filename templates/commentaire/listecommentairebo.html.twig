@@ -1,0 +1,83 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Categorie recette
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Gestion commentaires</h1>
+      <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+
+    </div>
+    {% for type, messages in app.flashes %}
+    <div class="alert alert-{{ type }} text-center">
+        {% for message in messages %}
+            {{ message | raw }}
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <a href="{{path('liste_commentaire')}}" class="btn btn-primary shadow mb-3">Tous les commentaires</a>
+    <a href="{{path('commentaire_positif')}}" class="btn btn-success shadow mb-3">Les commentaires positifs</a>
+    <a href="{{path('commentaire_negatif')}}" class="btn btn-danger shadow mb-3">Les commentaires negatifs</a>
+
+    <div class="row tableaudebord">
+
+
+      <div class="col-12">
+        <div class="card shadow mb-4">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Tous les commentaires</h6>
+          </div>
+      
+
+          <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <thead class="thead-dark text-uppercase text-center">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Membre</th>
+                        <th scope="col ">Recette</th>
+                        <th scope="col">Commentaire</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+            
+                 {% for commentaire in commentaire %}
+                    <tr>
+                        <td> {{ commentaire.id }} </td>
+                        <td><a href=""> {{ commentaire.membre.pseudo }} </a></td>
+                        <td> {{ commentaire.recette.titre }} </td>
+                        <td> {{ commentaire.commentaire }} € </td>
+                        <td class="{{ (commentaire.note > 5) ? 'bg-success' : 'bg-danger' }} text-white"> {{ commentaire.note }}/10 </td>
+                
+                        <td class="text-center">
+                             <a href="{{path('detail_commande', {'id':commentaire.id})}}" title="Voir"><i class="fa fa-eye"></i> </a> 
+                             <a href="{{path('supprimer_commentaire', {'id':commentaire.id})}}"onclick="return confirm('Voulez-vous supprimer ce commentaire?')"  class="text-danger" title="Supprimer"><i class="fa fa-trash"></i> </a> 
+
+                        </td>
+                    </tr>
+                {% endfor %} 
+                </tbody>
+            </table>
+
+           
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}

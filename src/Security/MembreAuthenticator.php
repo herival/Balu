@@ -71,7 +71,7 @@ class MembreAuthenticator extends AbstractFormLoginAuthenticator implements Pass
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Email non trouvé');
         }
 
         return $user;
@@ -97,7 +97,7 @@ class MembreAuthenticator extends AbstractFormLoginAuthenticator implements Pass
         }
 
         // For example : 
-        return new RedirectResponse($this->urlGenerator->generate('recette'));
+        return new RedirectResponse($this->urlGenerator->generate('accueil'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

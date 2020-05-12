@@ -73,6 +73,16 @@ class Membre implements UserInterface
      */
     private $commentaires;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $CP;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $ville;
+
     public function __construct()
     {
         $this->recettes = new ArrayCollection();
@@ -295,6 +305,30 @@ class Membre implements UserInterface
                 $commentaire->setMembre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCP(): ?int
+    {
+        return $this->CP;
+    }
+
+    public function setCP(int $CP): self
+    {
+        $this->CP = $CP;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }

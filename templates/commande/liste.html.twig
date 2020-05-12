@@ -1,0 +1,73 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Liste commande{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Commandes</h1>
+      <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+
+    </div>
+
+    <a href="{{path('liste_commande')}}" class="btn btn-primary shadow mb-3">Toutes les commandes</a>
+    <a href="{{path('liste_commande_livre')}}" class="btn btn-success shadow mb-3">Les commandes livrées</a>
+    <a href="{{path('liste_commande_encours')}}" class="btn btn-danger shadow mb-3">Les commandes en cours</a>
+    <div class="row tableaudebord">
+
+
+
+      <div class="col-12">
+        <div class="card shadow mb-4">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Toutes les commandes</h6>
+          </div>
+      
+          <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <thead class="thead-dark text-uppercase text-center">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Membre</th>
+                        <th scope="col ">Email</th>
+                        <th scope="col">Etat</th>
+                        <th scope="col">Montant</th>
+                        <th scope="col">Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+            
+                 {% for commande in liste_commande %}
+                    <tr>
+                        <td> {{ commande.id }} </td>
+                        <td> {{ commande.date |date("d/m/Y") }} </td>
+                        <td> {{ commande.membre.pseudo }} </td>
+                        <td> {{ commande.membre.email }} </td>
+                        <td class="text-center text-white {{ (commande.etat == 'En cours') ? 'bg-danger' : 'bg-success' }}"> {{ commande.etat }} </td>
+                        <td class="text-right"> {{ commande.montant }} € </td>
+                        <td class="text-center"> 
+                            <a href="{{path('detail_commande', {'id':commande.id})}}" title="Detail"><i class="fa fa-eye"></i> </a> 
+                            <a href="{{path('admin_commande_livrer', {'id':commande.id})}}" title="Marquer livré"><i class="fa fa-check"></i> </a> 
+                            <a href="{{path('admin_commande_nonlivrer', {'id':commande.id})}}" title="Marquer en cours" class="text-danger"><i class="fas fa-ban"></i> </a> 
+                        </td>
+                    </tr>
+                {% endfor %} 
+                </tbody>
+            </table>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

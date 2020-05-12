@@ -1,0 +1,82 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Categorie recette
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Categorie des recettes</h1>
+      <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+
+    </div>
+    {% for type, messages in app.flashes %}
+    <div class="alert alert-{{ type }} text-center">
+        {% for message in messages %}
+            {{ message | raw }}
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <div class="row tableaudebord">
+
+
+      <div class="col-lg-6 col-sm-12">
+        <div class="card shadow mb-4">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Toutes les catégories</h6>
+          </div>
+      
+          <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <thead class="thead-dark text-uppercase text-center">
+                    <tr>
+                        <th style="width: 20%;">ID</th>
+                        <th scope="col">Libellé</th>
+                        <th style="width: 20%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categorie in liste_categorie %}
+                    <tr>
+                        <td>
+                            {{ categorie.id }}
+                        </td>
+                        <td>
+                            {{ categorie.categorie }}
+                        </td>
+                        <td class="text-center">
+                            
+                            <a href="{{ path("categorie_modifier", { id: categorie.id }) }}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            
+    
+                            <a onclick="return confirm('Voulez-vous supprimer cette categorie?')" href="{{ path("categorie_supprimer", { id: categorie.id }) }}" class="text-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+    
+                        </td>
+                    </tr>
+                        
+                    {% endfor %}
+
+                </tbody>
+        
+            </table>
+            <a href="{{path('ajouter_categorie')}}" class="btn btn-primary shadow-sm">Ajouter une catégorie</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}

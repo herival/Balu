@@ -27,11 +27,21 @@ class Categorie
     /**
      * @ORM\OneToMany(targetEntity=Recette::class, mappedBy="categorie")
      */
-    private $recette;
+    private $recettes;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    public function __toString() 
+    {
+        return $this->getCategorie();
+    }
 
     public function __construct()
     {
-        $this->recette = new ArrayCollection();
+        $this->recettes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,15 +64,15 @@ class Categorie
     /**
      * @return Collection|Recette[]
      */
-    public function getRecette(): Collection
+    public function getRecettes(): Collection
     {
-        return $this->recette;
+        return $this->recettes;
     }
 
     public function addRecette(Recette $recette): self
     {
-        if (!$this->recette->contains($recette)) {
-            $this->recette[] = $recette;
+        if (!$this->recettes->contains($recette)) {
+            $this->recettes[] = $recette;
             $recette->setCategorie($this);
         }
 
@@ -71,13 +81,25 @@ class Categorie
 
     public function removeRecette(Recette $recette): self
     {
-        if ($this->recette->contains($recette)) {
-            $this->recette->removeElement($recette);
+        if ($this->recettes->contains($recette)) {
+            $this->recettes->removeElement($recette);
             // set the owning side to null (unless already changed)
             if ($recette->getCategorie() === $this) {
                 $recette->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

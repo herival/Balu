@@ -1,0 +1,130 @@
+{% extends 'basebackoffice.html.twig' %}
+
+{% block title %}Recettes
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Recettes</h1>
+        <div>
+            <Label>Selectionner une categorie</Label>
+            <select  class="form-control" name="page" onchange="window.location=this.value">
+                <option value="{{path('admin_liste_recette')}}">Toutes les categories</option>
+                {% for categorie in categorie %}
+                     <option value="{{path('recette_backoffice_recherche',{"id":categorie.id})}}" {% if id is defined %} {{ (categorie.id == id) ? 'selected'}} {% endif %} > {{ categorie.categorie }}</option>
+                {% endfor %}
+        
+            </select>
+        </div>
+
+      <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
+
+        
+
+
+    </div>
+
+    {% for type, messages in app.flashes %}
+        <div class="alert alert-{{ type }} text-center">
+            {% for message in messages %}
+                {{ message | raw }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <div class="row tableaudebord">
+
+
+      <div class="col-12">
+        <div class="card shadow mb-4">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Toutes les recettes</h6>
+          </div>
+      
+          <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <thead class="thead-dark text-uppercase text-center">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col" style="width: 15%;">image</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col" style="width: 20%;">description</th>
+                        <th scope="col">categorie</th>
+                        <th scope="col">preparation</th>
+                        <th scope="col">Etat</th>
+                        <th scope="col">Montant</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    {% for recette in liste_recettes %}
+                        <tr>
+                            <td>
+                                {{ recette.id }}
+                            </td>
+                            <td>
+                                <img class="image-miniature" src="{{asset("img/" ~ recette.image )}}" alt="">
+                            </td>
+                            <td>
+                                {{ recette.titre }}
+                            </td>
+                            <td>
+                                {{ recette.description |slice(0, 90)}}...
+                            </td>
+                            <td>
+                                {{ recette.categorie }}
+                            </td>
+                            <td>
+                                {{ recette.preparation |slice(0, 90)}}...
+                            </td>
+                           
+                            <td class="text-center"> {% if recette.vente == true %}
+                                    En vente
+                                        {% if id is defined %}
+                                            <a href="{{ path("admin_recette_retirercat", { "id": recette.id, "id_cat":id }) }}" class="btn btn-sm btn-danger col-12">Retirer</a>
+                                        {% else %}
+                                            <a href="{{ path("admin_recette_retirer", { "id": recette.id }) }}" class="btn btn-sm btn-danger col-12">Retirer</a>
+                                        {% endif %}
+                                    {% else %}
+                                    Pas en vente
+                                        {% if id is defined %}
+                                            <a href="{{ path("admin_recette_enventecat", { "id": recette.id , "id_cat":id }) }}" class="btn btn-sm btn-success col-12 ">Vendre</a>
+
+                                        {% else %}
+                                            <a href="{{ path("admin_recette_envente", { "id": recette.id }) }}" class="btn btn-sm btn-success col-12 ">Vendre</a>
+                                        {% endif %}
+                                {% endif %}</td>
+                            <td class="text-right">{{ recette.prix }} € </td>
+                            <td class="text-center">
+                                </a>
+                                <a href="{{ path("admin_recette_modifier", { "id": recette.id }) }}">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+        
+                                <a class="text-danger" onclick="return confirm('Voulez-vous supprimer cette recette?')" href="{{ path("recette_supprimer", { "id": recette.id }) }}">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+        
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        
+            </table>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+
+<div class="p-3">
+    <h1>Votre panier</h1>
+</div>
+<div class="container">
+    <table class="table table-light ">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center"style="width: 10%;">Reference</th>
+                <th>Recette</th>
+                <th class="text-right" style="width: 10%;">Prix</th>
+                <th class="text-right" style="width: 10%;">Quantite</th>
+                <th class="text-right" style="width: 10%;">Total</th>
+                <th style="width: 5%;"></th>
+            </tr>
+        </thead>
+        {% if panier | length > 0 %}
+        <tbody>
+            {% for article in panier %}
+                <tr>
+                    <td class="text-center">{{ article.recette.id }}</td>
+                    <td>{{ article.recette.titre }}</td>
+                    <td class="text-right">{{ article.recette.prix }} €</td>
+                    <td class="text-right">{{ article.quantite }}</td>
+                    <td class="text-right">{{ article.recette.prix * article.quantite }} €</td>
+                    <td> 
+                        <a href="{{ path('suppr_article_panier', {'id': article.recette.id }) }}" class="text-danger">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot >
+            <tr >
+                <th colspan="4" class="text-right border-top border-dark">
+                    Total :
+                </th>
+                <th class="text-right border-top border-dark">{{ total }} €</th>
+                <th class="border-top border-dark"></th>
+            </tr>
+        </tfoot>
+        {% else %}
+        <tbody>
+            
+            <tr>
+                <td class="text-center" colspan="5">
+                    Votre panier est vide!
+                </td> 
+             </tr>
+        </tbody>
+        {% endif %}
+    </table>
+    {% if panier | length > 0 %}
+        <div class="col-12 d-flex justify-content-end">
+            <a href="{{ path('nouvelle_commande')}}" class="btn btn-info shadow-sm pl-5 pr-5 mb-2">Payer</a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
