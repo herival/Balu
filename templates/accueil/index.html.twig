@@ -18,48 +18,35 @@
         <h2>Des recettes issues des pays du monde entier</h4>
     </div>
 
-
-    <div class="card-columns">
-        <div class="card" style="width: 18em;"> 
-            <a class="" href="">
-                <img class="card-img-top" src="{{ asset("img/recette1.png") }}" alt="">
-                    <button type="button" class="btn btn-light centered">Française</button>
-            </a>
-        </div><br>
-         <div class="card" style="width: 18em;"> 
-            <a class="" href="">
-                <img class="card-img-top" src="{{ asset("img/recette2.png") }}" alt="">
-                    <button type="button" class="btn btn-light centered">Turque</button>
-            </a>
-        </div><br>
-        <div class="card" style="width: 18em;"> 
-            <a class="" href="">
-                <img class="card-img-top" src="{{ asset("img/recette3.png") }}" alt="">
-                    <button type="button" class="btn btn-light centered">Afrique</button>
-            </a>
-        </div><br>
-    </div>
-    <div class="card-columns">
-        <div class="card" style="width: 18em;"> 
-            <a class="" href="">
-                <img class="card-img-top" src="{{ asset("img/recette4.png") }}" alt="">
-                    <button type="button" class="btn btn-light centered">Indienne</button>
-            </a>
-        </div><br>
-         <div class="card" style="width: 18em;"> 
-            <a class="" href="">
-                <img class="card-img-top" src="{{ asset("img/recette5.png") }}" alt="">
-                    <button type="button" class="btn btn-light centered">Italienne</button>
-            </a>
-        </div><br>
-        <div class="card" style="width: 18em;"> 
-            <a class="" href="">
-                <img class="card-img-top" src="{{ asset("img/recette6.png") }}" alt="">
-                    <button type="button" class="btn btn-light centered">Chinoise</button>
+    <div class="container mx-auto">
+  
+        <div class="row mx-auto" style="width: 90%;">
+            
+            {% for categorie in categorie %}
+                
+            <div class="col-md-4 p-3">
+            <div class="card box-shadow">
+    
+    
+                <a href="{{path('accueil')}}">
+                    <img class="card-img-top" src="{{ asset("img/" ~ categorie.image) }}" alt="">
+                    <button type="button" class="btn btn-light centered">{{ categorie.categorie }}</button>
                 </a>
-        </div><br>
+    
+                </div>
+                </div>
+        
+    
+            {% endfor %}
+        
+        </div>
     </div>
+
+
+
 </div>
+
+
 
 
 {% endblock %}

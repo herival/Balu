@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CategorieRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AccueilController extends AbstractController
 {
     /**
      * @Route("/", name="accueil")
      */
-    public function index()
+    public function index(CategorieRepository $cat)
     {
+        $categorie = $cat->findAll();
+
         return $this->render('accueil/index.html.twig', [
-            'controller_name' => 'AccueilController',
+            'categorie' => $categorie,
         ]);
     }
 }

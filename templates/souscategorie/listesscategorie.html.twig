@@ -1,6 +1,6 @@
 {% extends 'basebackoffice.html.twig' %}
 
-{% block title %}Categorie recette
+{% block title %}Sous categorie recette
 {% endblock %}
 
 {% block body %}
@@ -8,7 +8,7 @@
 <div class="container-fluid">
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Categorie des recettes</h1>
+      <h1 class="h3 mb-0 text-gray-800">Les sous categories de recette</h1>
       <a href="{{ path('accueil') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Retour sur le site</a>
 
 
@@ -28,7 +28,7 @@
         <div class="card shadow mb-4">
  
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Toutes les catégories</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Les sous catégories</h6>
           </div>
       
           <div class="card-body">
@@ -43,22 +43,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for categorie in liste_categorie %}
+                    {% for categorie in liste_souscategorie %}
                     <tr>
                         <td>
                             {{ categorie.id }}
                         </td>
                         <td>
-                            {{ categorie.categorie }}
+                            {{ categorie.souscategorie }}
                         </td>
                         <td class="text-center">
                             
-                            <a href="{{ path("categorie_modifier", { id: categorie.id }) }}">
+                            <a href="{{ path("souscategorie_modifier", { id: categorie.id }) }}">
                                 <i class="fa fa-edit"></i>
                             </a>
                             
     
-                            <a onclick="return confirm('Voulez-vous supprimer cette categorie?')" href="{{ path("categorie_supprimer", { id: categorie.id }) }}" class="text-danger">
+                            <a onclick="return confirm('Voulez-vous supprimer cette categorie?')" href="{{ path("souscategorie_supprimer", { id: categorie.id }) }}" class="text-danger">
                                 <i class="fa fa-trash"></i>
                             </a>
     
@@ -70,8 +70,7 @@
                 </tbody>
         
             </table>
-            <a href="{{path('ajouter_categorie')}}" class="btn btn-primary shadow-sm">Ajouter une catégorie</a>
-            <a href="{{path('souscategorie')}}" class="btn btn-primary shadow-sm">Sous Categorie</a>
+            <a href="{{path('ajouter_souscategorie')}}" class="btn btn-primary shadow-sm">Ajouter une sous-catégorie</a>
 
           </div>
         </div>

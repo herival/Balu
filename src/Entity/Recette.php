@@ -99,6 +99,11 @@ class Recette
      */
     private $difficulte;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Souscategorie::class, inversedBy="recettes")
+     */
+    private $souscategorie;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -376,6 +381,18 @@ class Recette
     public function setDifficulte(?string $difficulte): self
     {
         $this->difficulte = $difficulte;
+
+        return $this;
+    }
+
+    public function getSouscategorie(): ?Souscategorie
+    {
+        return $this->souscategorie;
+    }
+
+    public function setSouscategorie(?Souscategorie $souscategorie): self
+    {
+        $this->souscategorie = $souscategorie;
 
         return $this;
     }

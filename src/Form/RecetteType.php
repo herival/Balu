@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Recette;
 use App\Entity\Categorie;
+use App\Entity\Souscategorie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -73,6 +74,10 @@ class RecetteType extends AbstractType
                     "class" => Categorie::class, 
                     "choice_label" => "categorie" 
                     ]) 
+            ->add('souscategorie', EntityType::class, [ 
+                "class" => Souscategorie::class, 
+                "choice_label" => "souscategorie" 
+                ]) 
         
             ->add('vente', null)
             ->add('cuisson', TimeType::class, ["widget" => "single_text",
