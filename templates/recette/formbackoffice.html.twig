@@ -92,7 +92,11 @@
                 </li>
                 {% endfor %}
                 <li class=" list-group-item text-center">
-                    <img src="{{asset("img/" ~ recetteAmodifier.image )}}" alt="">
+
+                    <div style="width:100%; height:50vh; overflow:hidden">
+                        <img src="{{asset("img/" ~ recetteAmodifier.image )}}" style="width:100%; margin: 0 0;"/>
+                    </div>
+
                 </li>
 
             </ul>
