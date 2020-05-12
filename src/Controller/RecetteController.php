@@ -325,6 +325,15 @@ class RecetteController extends AbstractController
 
         if($formCategorie->isSubmitted() && $formCategorie->isValid()){
 
+            $image = $formCategorie->get("image")->getData();
+
+            if($image){
+                $nomImage = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $nomImage= str_replace(" ", "_", $nomImage);
+                $nomImage .= "_". uniqid().".".$image->guessExtension();
+                $image->move($this->getParameter('dossier_images'), $nomImage);
+                $nouvelle_categorie->setImage($nomImage);
+            }
             $em->persist($nouvelle_categorie);
             $em->flush();
 
