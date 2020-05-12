@@ -1,71 +1,34 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootstrap/scss/bootstrap";
-@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-body {
-  background-image: url("../../public/img/1.png");
-}
 
+body {
+    background-image: url('../../public/img/1.png');
+}
 .none {
-  color: rgba(255, 255, 255, 0.267);
+    color: rgba(255, 255, 255, 0.267);
 }
-.content-body {
-  min-height: 80vh;
-.min-height{
+.content-body{
     min-height: 80vh;
-}
-.content-body {
-    min-height: 80vh;
-}
-.ligne-blanche{
-    height: 2px;
-    background-color: white;
-    width: 100%;
 }
 a.navbar-brand {
-  font-family: "Lobster", cursive;
-  font-size: x-large;
+    font-family: 'Lobster', cursive;
+    font-size: x-large;
 }
-.bg-trans {
-  background-color: rgba(253, 253, 253, 0.479) !important;
-
-a.navbar-brand :hover {
-    color: green;
-}
-.carte-recherche{
-    height: 10vh;
-}
-.bg-trans {
+.bg-trans{
     background-color:rgba(253, 253, 253, 0.479)!important;
 }
-
 // Taille image fiche recette
-.image-recette {
-  background-size: cover;
-  width: 100%;
-  height: 40vh;
-}
-.image-miniature {
-  width: 100%;
-  height: 30%;
-}
-.recettes {
-  // position: relative;
-  // left: 10%;
-  // bottom: 20%;
-  display: flex;
-  flex-direction: column;
+.image-recette{
     background-size: cover;
     width: 100%;
     height: 40vh;
 }
-
-.image-miniature {
+.image-miniature{
     width: 100%;
     height: 30%
 }
-
 .recettes { 
     // position: relative; 
     // left: 10%; 
@@ -75,16 +38,11 @@ a.navbar-brand :hover {
 }
 
 .titre {
-  position: relative;
-  padding-top: 20px;
-  padding-bottom: 20px;
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-h1,
-h2 {
-  font-family: "Lobster", cursive;
-  text-align: center;
-  color: rgb(240, 237, 51);
 h1, h2 {
     font-family: 'Lobster', cursive;
     text-align: center; 
@@ -92,8 +50,8 @@ h1, h2 {
 }
 
 .card-columns {
-  justify-content: space-around;
-  align-self: center;
+    justify-content: space-around;
+    align-self: center;
 }
 
 .centered {
@@ -109,46 +67,45 @@ h1, h2 {
 
 // ######################## FOOTER ########################## //
 section {
-  min-height: 775px;
-  max-width: 1000px;
+    min-height: 775px; 
+    max-width:1000px;
 }
 
 footer {
-  background-color: rgb(64, 64, 92);
-  min-height: 20vh;
     background-color: rgb(64, 64, 92);
-    min-height: 20vh;   
+    min-height: 20vh;
+    
 }
 
 footer .fin {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
 }
 
 footer .fin a {
-  color: whitesmoke;
-  text-decoration: none;
+    color: whitesmoke;
+    text-decoration: none;
 }
 
 footer .fin a:hover {
-  color: red;
+    color: red;
 }
 
-footer span {
+footer p {
+    background-color: rgb(64, 64, 92);
+    color: whitesmoke;
+    height: 50px;
+    padding: 10px;
+}
+
+span {
     font-family: 'Lobster', cursive;
-    font-size: 1.5em;
+    font-size: xx-large;
 }
 
 footer .icons {
     display: flex;
     justify-content: space-evenly;
     font-size: xx-large;
-}
-
-footer p {
-  background-color: rgb(64, 64, 92);
-  color: whitesmoke;
-  height: 50px;
-  padding: 10px;
 }
