@@ -19,6 +19,43 @@ class CommentaireRepository extends ServiceEntityRepository
         parent::__construct($registry, Commentaire::class);
     }
 
+    /**
+     * @return Commentaire[] Returns an array of Commentaire objects
+     */
+    
+    public function findByMembre($membre, $recette)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.membre = :membre')
+            ->andWhere('c.recette = :recette')
+            ->setParameter('membre', $membre)
+            ->setParameter('recette', $recette)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findByNote_positif($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.note >= :note')
+            ->setParameter('note', $value)
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findByNote_negatif($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.note < :note')
+            ->setParameter('note', $value)
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
     // /**
     //  * @return Commentaire[] Returns an array of Commentaire objects
     //  */

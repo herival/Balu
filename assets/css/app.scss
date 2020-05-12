@@ -46,13 +46,24 @@ a.navbar-brand {
 h1, h2 {
     font-family: 'Lobster', cursive;
     text-align: center; 
-    color: rgb(240, 237, 51);
+    color: #f6e58d;
 }
 
 .card-columns {
     justify-content: space-around;
     align-self: center;
 }
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: x-large;
+    color: black;
+  }
+
+
 
 // ######################## FOOTER ########################## //
 section {
