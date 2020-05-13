@@ -79,7 +79,6 @@
                                 <a href="{{ path('fiche_membre', {"id":membre.id}) }}"><i class="fa fa-eye"></i> </a>
                                 <a href="{{ path('modifier_membre', {"id":membre.id}) }}"><i class="fa fa-edit"></i></a> 
                                 <a href="{{ path('supprimer_membre', {"id":membre.id}) }}" onclick="return confirm('Voulez-vous supprimer cet utilisateur?')" class="text-danger"> <i class="fa fa-trash"></i> </a> 
-                            
                             </td> 
                         </tr>
                     {% endfor %} 
