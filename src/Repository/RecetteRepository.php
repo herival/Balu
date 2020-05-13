@@ -45,6 +45,18 @@ class RecetteRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function PaysFindBySousCategorie($categorie, $souscategorie)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.categorie = :categorie')
+            ->setParameter('categorie', $categorie)
+            ->andWhere('r.souscategorie = :souscategorie')
+            ->setParameter('souscategorie', $souscategorie)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
     public function findByIngredient($recherche)
     {
