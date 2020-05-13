@@ -17,21 +17,26 @@ require("bootstrap");
 
 console.log("Hello Webpack Encore! Edit me in assets/js/app.js");
 
-// $(function () {
-//   var showRequiredCategory = function () {};
-//   showRequiredCategory(this);
-//   $(".toggleDisplay").click(function (event) {
-//     const getID = event.id;
-//     event.classList.toggle("active");
-//     const getCategory = document.querySelector(".category-" + getID);
-//     getCategory.classList.toggle("showCategory");
-//     getCategory.classList.toggle("hideCategory");
-//   });
-// });
-
 $(document).ready(function () {
-  $(".toggleDisplay").click(function () {
+  $(".toggleDisplay-1").click(function () {
     $(".category-1").toggleClass("showCategory");
     $(".category-1").toggleClass("hideCategory");
+    $(".toggleDisplay-1").toggleClass("active");
+  });
+});
+
+$(document).ready(function () {
+  $(".toggleDisplay-2").click(function () {
+    $(".category-2").toggleClass("showCategory");
+    $(".category-2").toggleClass("hideCategory");
+    $(".toggleDisplay-2").toggleClass("active");
+  });
+});
+
+$(document).ready(function () {
+  $(".toggleDisplay-3").click(function () {
+    $(".category-3").toggleClass("showCategory");
+    $(".category-3").toggleClass("hideCategory");
+    $(".toggleDisplay-3").toggleClass("active");
   });
 });

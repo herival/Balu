@@ -1,47 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}BALU !{% endblock %}
+{% block title %}BALU !
+{% endblock %}
 
-{% block h1 %}BIENVENUE CHEZ BALU !{% endblock %}
+{% block h1 %}BIENVENUE CHEZ BALU !
+{% endblock %}
 
 {% block body %}
 
 
-<div class="recettes">
-    <div class="titre">
-        <h1 class="display-4 text-center">Venez goûter nos plats savoureux</h1>
-        <h2>Des recettes issues des pays du monde entier</h4>
-    </div>
+	<div class="recettes">
+		<div class="titre">
+			<h1 class="display-4 text-center">Venez goûter nos plats savoureux</h1>
+			<h2>Des recettes issues des pays du monde entier</h4>
+		</div>
 
-    <div class="container mx-auto">
-  
-        <div class="row mx-auto" style="width: 90%;">
-            
-            {% for categorie in categorie %}
-                
-            <div class="col-md-4 p-3">
-            <div class="card box-shadow">
-    
-    
-                <a href="{{path('accueil')}}">
-                    <div style="width:100%; height:23vh; overflow:hidden">
-                        <img src="{{ asset("img/" ~ categorie.image) }}" style="width:100%; margin: 0 0;"/>
-                    </div>
-                    <button type="button" class="btn btn-light centered">{{ categorie.categorie }}</button>
-                </a>
-    
-                </div>
-                </div>
-        
-    
-            {% endfor %}
-        
-        </div>
-    </div>
+		<div class="container mx-auto">
+
+			<div class="row mx-auto" style="width: 90%;">
+
+				{% for categorie in categorie %}
+
+					<div class="col-md-4 p-3">
+						<div class="card box-shadow">
 
 
+							<a href="{{path('accueil')}}">
+								<div style="width:100%; height:20vh;  overflow:hidden">
+									<img src="{{ asset("img/" ~ categorie.image) }}" style="width:100%; margin: 0 0; height:inherit;"/>
+								</div>
+								<button type="button" class="btn btn-light centered">{{ categorie.categorie }}</button>
+							</a>
 
-</div>
+						</div>
+					</div>
+
+
+				{% endfor %}
+
+			</div>
+		</div>
+
+
+	</div>
 
 
 {% endblock %}

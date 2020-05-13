@@ -2,9 +2,8 @@
 @import "~bootstrap/scss/bootstrap";
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 
-
 body {
-    background-image: url('../../public/img/1.png');
+  background-image: url("../../public/img/1.png");
 }
 .none {
   color: rgba(255, 255, 255, 0.267);
@@ -75,9 +74,9 @@ a.navbar-brand :hover {
 }
 
 .titre {
-    position: relative;
-    padding-top: 20px;
-    padding-bottom: 20px;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 h1,
@@ -94,8 +93,8 @@ h2 {
 }
 
 .card-columns {
-    justify-content: space-around;
-    align-self: center;
+  justify-content: space-around;
+  align-self: center;
 }
 
 .centered {
@@ -109,8 +108,8 @@ h2 {
 
 // ######################## FOOTER ########################## //
 section {
-    min-height: 775px; 
-    max-width:1000px;
+  min-height: 775px;
+  max-width: 1000px;
 }
 
 footer {
@@ -121,25 +120,25 @@ footer {
 }
 
 footer .fin {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
 }
 
 footer .fin a {
-    color: whitesmoke;
-    text-decoration: none;
+  color: whitesmoke;
+  text-decoration: none;
 }
 
 footer .fin a:hover {
-    color: red;
+  color: red;
 }
 
 footer p {
-    background-color: rgb(64, 64, 92);
-    color: whitesmoke;
-    height: 50px;
-    padding: 10px;
+  background-color: rgb(64, 64, 92);
+  color: whitesmoke;
+  height: 50px;
+  padding: 10px;
 }
 
 footer span {
@@ -164,4 +163,7 @@ div.hideCategory {
 }
 .showCategory {
   display: block;
+}
+.active {
+  background-color: palevioletred;
 }
