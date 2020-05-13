@@ -19,13 +19,13 @@
             
             {% for categorie in categorie %}
                 
-            <div class="col-md-4 p-3">
-            <div class="card box-shadow">
+            <div class="col-md-4 p-3" >
+            <div class="card box-shadow" >
     
     
                 <a href="{{path('accueil')}}">
                     <div style="width:100%; height:23vh; overflow:hidden">
-                        <img src="{{ asset("img/" ~ categorie.image) }}" style="width:100%; margin: 0 0;"/>
+                        <img src="{{ asset("img/" ~ categorie.image) }}" style="width:100%; height:100%; margin: 0 0;"/>
                     </div>
                     <button type="button" class="btn btn-light centered">{{ categorie.categorie }}</button>
                 </a>

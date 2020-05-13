@@ -84,4 +84,15 @@ class FicheUtilisateurController extends AbstractController
             ]);
     }
 
+    /**
+     * @Route("/fiche/utilisateur/recette", name="recette_utilisateur")
+     */
+    public function liste_recette()
+    {
+        $liste_recette = $this->getUser();
+            //  dd($liste_commande);
+        return $this->render('fiche_utilisateur/recetteutilisateur.html.twig', [
+            'liste_recette' => $liste_recette,
+            ]);
+    }
 }

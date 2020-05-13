@@ -33,5 +33,13 @@ class AccueilController extends AbstractController
         return $this->menu->findAll();
     }
 
+    /**
+     * @Route("/erreur", name="erreur")
+     */
+    public function erreur()
+    {
+        
+        return $this->render('erreur404.html.twig');
+    }
 
 }
