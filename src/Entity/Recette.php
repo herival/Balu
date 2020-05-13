@@ -104,6 +104,11 @@ class Recette
      */
     private $souscategorie;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $note;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -393,6 +398,18 @@ class Recette
     public function setSouscategorie(?Souscategorie $souscategorie): self
     {
         $this->souscategorie = $souscategorie;
+
+        return $this;
+    }
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(?float $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }

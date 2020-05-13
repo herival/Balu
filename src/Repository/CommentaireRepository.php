@@ -54,6 +54,26 @@ class CommentaireRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function MoyenneRecette($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.recette = :recette')
+            ->setParameter('recette', $value)
+            ->select('SUM(c.note) as moyenne')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findByRecette($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.recette = :recette')
+            ->setParameter('recette', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     // /**

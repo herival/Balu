@@ -14,7 +14,7 @@ class AccueilController extends AbstractController
      */
     public function index(CategorieRepository $cat)
     {
-        $categorie = $cat->findAll();
+        $categorie = $cat->findBy([],[],6);
     
         return $this->render('accueil/index.html.twig', [
             'categorie' => $categorie,

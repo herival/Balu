@@ -31,6 +31,7 @@
                         <th scope="col">Cuisson</th>
                         <th scope="col">Preparation</th>
                         <th scope="col">Coût</th>
+                        <th scope="col">Note</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,7 @@
                             <td> {{ recette.cuisson|date("H\\h\\ i\\m\\") }}</td>
                             <td> {{ recette.tpspreparation|date("H\\h\\ i\\m\\") }}</td>
                             <td> {{ recette.prix }} €</td>
+                            <td> {{ recette.note|number_format(1) }} /10</td>
 
 
                         
