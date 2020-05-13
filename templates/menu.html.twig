@@ -23,7 +23,7 @@
                                <!-- menu est une variable globale défini dans twig.yaml  -->
                                <!-- liste_categorie_global est la fonction qui fait appel à la base de donnee dans le controlleur -->
             {% for categorie in menu.liste_categorie_global %}
-              <a class="dropdown-item" href="#">{{categorie.categorie}}</a>
+              <a class="dropdown-item" href="{{ path('recettesdupays',{"idPays":categorie.id}) }}">{{categorie.categorie}}</a>
             {% endfor %}  
 
         </div>
