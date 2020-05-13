@@ -1,32 +1,57 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+	+
+	{{ parent() }}
+	+
+	{{ encore_entry_link_tags('app') }}
+	+
+{% endblock %}
+
 {% block title %}Fiche recette
 {% endblock %}
 
 {% block body %}
 	<div class="container bg-trans">
 		<h1>Toutes les recettes</h1>
+		<div>
+			<button type="button" id="1" class="active toggleDisplay">Entrée</button>
+			<button type="button" id="platderesistance" class="active toggleDisplay">
+				Plat de resistance</button>
+			<button type="button" id="dessert" class="active toggleDisplay">
+				dessert</button>
+		</div>
+		<div class="showCategory category-1">
+			{% for recette in liste_recettes %}
 
-		{% for recette in liste_recettes %}
 
+				<div class="row bg-trans rounded-lg mt-2 mb-2">
+					<div class="col-3">
+						<img class="card-img-top" src="{{ asset("img/" ~ recette.image )}}" alt="Card image cap">
+					</div>
 
-			<div class="row bg-trans rounded-lg mt-2 mb-2">
-				<div class="col-3">
-					<img class="card-img-top" src="{{ asset("img/" ~ recette.image )}}" alt="Card image cap">
+					<div class="col-8">
+
+						<h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
+						<p class="card-text text-dark">{{recette.description}}</p>
+						<a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2">Voir la recette</a>
+
+					</div>
 				</div>
 
-				<div class="col-8">
-
-					<h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
-					<p class="card-text text-dark">{{recette.description}}</p>
-					<a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2">Voir la recette</a>
-
-				</div>
-			</div>
-
-		{% endfor %}
+			{% endfor %}
+		</div>
 
 	</div>
 
 
+{% endblock %}
+
+
+{% block javascripts %}
+	+
+	{{ parent() }}
+	+
+	{{ encore_entry_script_tags('app') }}
+	+
 {% endblock %}
