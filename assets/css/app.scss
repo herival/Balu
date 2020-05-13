@@ -3,23 +3,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 body {
-  background-image: url("../../public/img/1.png");
+  background-image: url("../../img/2.png");
+  width: 100%;
 }
 
 .none {
     color: rgba(255, 255, 255, 0.267);
 }
-.erreur{
+
+.erreur {
   font-size: 10em;
 }
-.content-body{
+
+.content-body {
     min-height: 80vh;
 }
 
 a.navbar-brand {
     font-family: 'Lobster', cursive;
     font-size: x-large;
-    color: rgb(64, 64, 92);
+    // color: rgb(64, 64, 92);
 }
 
 .bg-trans{
@@ -33,7 +36,7 @@ a.navbar-brand {
     height: 40vh;
 }
 
-.image-miniature{
+.image-miniature {
     width: 100%;
     height: 30%
 } 
@@ -55,7 +58,7 @@ a.navbar-brand {
 h1, h2 {
     font-family: 'Lobster', cursive;
     text-align: center; 
-    color: #f6e58d;
+    color: rgb(64, 64, 92);
 }
 
 .card-columns {
@@ -80,7 +83,7 @@ h1, h2 {
 // ######################## FOOTER ########################## //
 
 footer {
-    background-color:whitesmoke;
+    background-color: rgba(245, 218, 99, 0.788);
     min-height: 20vh; 
 }
 
@@ -103,7 +106,7 @@ footer .fin a:hover {
 }
 
 footer p {
-  background-color: whitesmoke;
+  background-color:rgba(245, 218, 99, 0.788);
   color: rgb(64, 64, 92);
   height: 50px;
   padding: 10px;
@@ -111,8 +114,8 @@ footer p {
 
 span {
     font-family: 'Lobster', cursive;
-    font-size: xx-large;
     color: rgb(64, 64, 92);
+    font-size: xx-large;
 }
 
 footer .icons {
