@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+<h1>Modifier les informations</h1>
+
+
+
+<div class="container-fluid">
+
+    <div class="row tableaudebord ">
+
+
+      <div class="col-md-6 mx-auto ">
+        <div class="card shadow mb-4 bg-trans">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Mon compte</h6>
+          </div>
+      
+          <div class="card-body text-dark">
+
+            {{form_start(formMembre)}}
+                {{form_row(formMembre.nom)}}
+                {{form_row(formMembre.prenom)}}
+                {{form_row(formMembre.Pseudo)}}
+                {{form_row(formMembre.email)}}
+                {{form_row(formMembre.password)}}
+                {{form_row(formMembre.adresse)}}
+               <div class="row">
+                    <div class="col-md-4">{{form_row(formMembre.cp)}}</div>
+                    <div class="col-md-8">{{form_row(formMembre.ville)}}</div>
+                </div>
+                <button type="submit" class="btn btn-primary shadow">Modifier</button>
+                <a href="{{path('fiche_utilisateur')}}" class="btn btn-secondary shadow">Annuler</a>
+            {{form_end(formMembre)}}
+              
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

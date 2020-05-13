@@ -17,7 +17,6 @@ class MembreType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('email', )
             ->add('roles' , ChoiceType::class, [ 
                 "choices" => [ 
                     "Membre" => "ROLE_USER", 

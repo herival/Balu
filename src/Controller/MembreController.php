@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface as Pass
 class MembreController extends AbstractController
 {
     /**
-     * @Route("/membre", name="membre")
+     * @Route("/admin/membre", name="membre")
      */
     public function index()
     {
@@ -26,7 +26,7 @@ class MembreController extends AbstractController
     }
 
         /**
-     * @Route("/membre/liste", name="liste_membre")
+     * @Route("/admin/membre/liste", name="liste_membre")
      */
     public function liste(MembreRepository $membre)
     {
@@ -39,7 +39,7 @@ class MembreController extends AbstractController
         ]);
     }
     /**
-     * @Route("/membre/modifier/{id}", name="modifier_membre")
+     * @Route("/admin/membre/modifier/{id}", name="modifier_membre")
      */
     public function modifier(EntityManager $em, Request $request, $id, MembreRepository $membre, PasswordEncoder $up) 
     {
@@ -67,7 +67,7 @@ class MembreController extends AbstractController
         ["formMembre" => $formMembre->createView(), "membre" => $membre]);
     }
     /**
-     * @Route("/membre/supprimer/{id}", name="supprimer_membre")
+     * @Route("/admin/membre/supprimer/{id}", name="supprimer_membre")
      */
     public function supprimer(CommandeRepository $com, EntityManager $em, Request $request, $id, MembreRepository $membre)
     {
@@ -91,7 +91,7 @@ class MembreController extends AbstractController
     }
 
     /**
-     * @Route("/membre/fiche/{id}", name="fiche_membre")
+     * @Route("/admin/membre/fiche/{id}", name="fiche_membre")
      */
     public function fiche_membre($id, MembreRepository $membre)
     {
@@ -103,7 +103,7 @@ class MembreController extends AbstractController
     }
 
     /**
-     * @Route("/membre/liste_admin", name="liste_membre_admin")
+     * @Route("/admin/membre/liste_admin", name="liste_membre_admin")
      */
     public function liste_membre_admin(MembreRepository $membre)
     {
@@ -146,6 +146,8 @@ class MembreController extends AbstractController
             'liste_prenom'=> $liste_prenom
         ]);
     }
+
+
 
 
 }
