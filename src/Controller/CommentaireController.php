@@ -64,13 +64,30 @@ class CommentaireController extends AbstractController
         $formCommentaire->handleRequest($request);
 
         if($formCommentaire->isSubmitted() && $formCommentaire->isValid()){
+            $note = $formCommentaire->get("note")->getData();
+
+            $denominateur = $comment->findByRecette($id);
+            $total = $comment->MoyenneRecette($id);
+            
+            //dd(($total[0]['moyenne']+$note)/ count($denominateur));
+            
+            
             $nouveau_commentaire->setRecette($recette);
             $nouveau_commentaire->setMembre($this->getUser());
+            if ($denominateur){
+                $recette->setNote((($total[0]['moyenne']+$note)/ (count($denominateur)+1)));
+            } else 
+                $recette->setNote($note);
             $em->persist($nouveau_commentaire);
+            
             $em->flush();
 
+            
+            
             return $this->redirectToRoute("fiche_recette", ["id"=>$id]);
         }
+
+
 
 
         return $this->render('commentaire/nvCommentaire.html.twig', [

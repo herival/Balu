@@ -15,14 +15,15 @@
 	<div class="container bg-trans">
 		<h1>Toutes les recettes</h1>
 		<div>
-			<button type="button" id="1" class="active toggleDisplay">Entrée</button>
-			<button type="button" id="platderesistance" class="active toggleDisplay">
+			<button type="button" id="1" class="active toggleDisplay-1">Entrée</button>
+			<button type="button" id="platderesistance" class="active toggleDisplay-2">
 				Plat de resistance</button>
-			<button type="button" id="dessert" class="active toggleDisplay">
+			<button type="button" id="dessert" class="active toggleDisplay-3">
 				dessert</button>
 		</div>
 		<div class="showCategory category-1">
-			{% for recette in liste_recettes %}
+
+			{% for recette in liste_recettes_1 %}
 
 
 				<div class="row bg-trans rounded-lg mt-2 mb-2">
@@ -40,18 +41,66 @@
 				</div>
 
 			{% endfor %}
+
+
+		</div>
+		<div class="showCategory category-2">
+
+			{% for recette in liste_recettes_2 %}
+
+
+				<div class="row bg-trans rounded-lg mt-2 mb-2">
+					<div class="col-3">
+						<img class="card-img-top" src="{{ asset("img/" ~ recette.image )}}" alt="Card image cap">
+					</div>
+
+					<div class="col-8">
+
+						<h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
+						<p class="card-text text-dark">{{recette.description}}</p>
+						<a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2">Voir la recette</a>
+
+					</div>
+				</div>
+
+
+			{% endfor %}
+
+
+		</div>
+		<div class="showCategory category-3">
+
+			{% for recette in liste_recettes_3 %}
+
+
+				<div class="row bg-trans rounded-lg mt-2 mb-2">
+					<div class="col-3">
+						<img class="card-img-top" src="{{ asset("img/" ~ recette.image )}}" alt="Card image cap">
+					</div>
+
+					<div class="col-8">
+
+						<h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
+						<p class="card-text text-dark">{{recette.description}}</p>
+						<a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2">Voir la recette</a>
+
+					</div>
+				</div>
+			{% endfor %}
+
 		</div>
 
-	</div>
+		<pre>
+	{{ dump(liste_recettes_1,liste_recettes_2,liste_recettes_3) }}
+</pre>
+
+	{% endblock %}
 
 
-{% endblock %}
-
-
-{% block javascripts %}
-	+
-	{{ parent() }}
-	+
-	{{ encore_entry_script_tags('app') }}
-	+
-{% endblock %}
+	{% block javascripts %}
+		+
+		{{ parent() }}
+		+
+		{{ encore_entry_script_tags('app') }}
+		+
+	{% endblock %}

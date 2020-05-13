@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+<h1>Mes recettes</h1>
+
+
+
+<div class="container-fluid">
+
+    <div class="row tableaudebord ">
+
+
+      <div class="col-md-10 mx-auto ">
+        <div class="card shadow mb-4 bg-trans">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Mes recette en ligne:</h6>
+          </div>
+      
+          <div class="card-body">
+
+            <table class="table table-bordered text-dark bg-trans">
+
+                <thead class="thead-dark text-uppercase text-center">
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col ">Description</th>
+                        <th scope="col">Cuisson</th>
+                        <th scope="col">Preparation</th>
+                        <th scope="col">Coût</th>
+                        <th scope="col">Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recette in liste_recette.recettes %}
+                        <tr>
+                            <td> {{ recette.titre }} </td>
+                            <td> {{ recette.categorie }}</td>
+                            <td> {{ recette.description }}</td>
+                            <td> {{ recette.cuisson|date("H\\h\\ i\\m\\") }}</td>
+                            <td> {{ recette.tpspreparation|date("H\\h\\ i\\m\\") }}</td>
+                            <td> {{ recette.prix }} €</td>
+                            <td> {{ recette.note|number_format(1) }} /10</td>
+
+
+                        
+                        </tr>
+                        
+      
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                 
+                        <tr >
+                            <th colspan="4" class="text-right">
+                                Total :
+                            </th>
+                            <th class="text-right border-top "></th>
+                           
+                        </tr>
+                   
+                    
+                </tfoot>
+        
+            </table>
+              
+          </div>
+        </div>
+        <a href="{{path('commande_utilisateur')}}"  class="btn btn-info shadow-sm mb-2">Retour</a>
+      </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

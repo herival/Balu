@@ -35,16 +35,22 @@ class RecetteController extends AbstractController
         ]);
     }
     /**
-     * @Route("/recette/pays/{id}", name="recettesdupays")
+     * @Route("/recette/pays/{idPays}", name="recettesdupays")
      */
-    public function recettes_par_pays($id, RecetteRepository $RR)
+    public function recettes_par_pays($idPays, RecetteRepository $RR)
     { 
-        $liste_recettes = $RR->findByCategorie($id);
+        $liste_recettes_1 = $RR->PaysFindBySousCategorie($idPays,1);
+        $liste_recettes_2 = $RR->PaysFindBySousCategorie($idPays,2);
+        $liste_recettes_3= $RR->PaysFindBySousCategorie($idPays,3);
+        //dd($liste_recettes);
+
 
 
         
         return $this->render('recette/recettesdupays.html.twig', [
-            'liste_recettes' => $liste_recettes
+            'liste_recettes_1' => $liste_recettes_1,
+            'liste_recettes_2' => $liste_recettes_2,
+            'liste_recettes_3' => $liste_recettes_3
         ]);
     }
 

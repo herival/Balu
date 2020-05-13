@@ -61,7 +61,6 @@
                         <td class="{{ (commentaire.note > 5) ? 'bg-success' : 'bg-danger' }} text-white"> {{ commentaire.note }}/10 </td>
                 
                         <td class="text-center">
-                             <a href="{{path('detail_commande', {'id':commentaire.id})}}" title="Voir"><i class="fa fa-eye"></i> </a> 
                              <a href="{{path('supprimer_commentaire', {'id':commentaire.id})}}"onclick="return confirm('Voulez-vous supprimer ce commentaire?')"  class="text-danger" title="Supprimer"><i class="fa fa-trash"></i> </a> 
 
                         </td>
