@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+<h1>Mon compte</h1>
+
+
+
+<div class="container-fluid">
+
+    <div class="row tableaudebord ">
+
+
+      <div class="col-md-6 mx-auto ">
+        <div class="card shadow mb-4 bg-trans">
+ 
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Mon compte</h6>
+          </div>
+      
+          <div class="card-body">
+
+              <table class="table table-bordered bg-trans">
+                  <tbody class="thead-dark text-dark">
+
+                    <tr>
+                     <th scope="row">E-mail</th>
+                      <td>{{ membre.email }}</td>
+                    </tr> 
+                    <tr>
+                     <th scope="row">Pseudo</th>
+                      <td>{{ membre.Pseudo }}</td>
+                    </tr> 
+                    <tr>
+                     <th scope="row">Nom</th>
+                      <td>{{ membre.nom }}</td>
+                    </tr> 
+                    <tr>
+                     <th scope="row">Prénom</th>
+                      <td>{{ membre.prenom }}</td>
+                    </tr> 
+                    <tr>
+                     <th scope="row">Adresse</th>
+                      <td>{{ membre.adresse }}</td>
+                    </tr> 
+                    <tr>
+                    <th scope="row">Code postal</th>
+                        <td>{{ membre.cp }}</td>
+                    </tr>
+                        <th scope="row">Ville</th>
+                        <td>{{ membre.ville }}</td>
+                    </tr>
+
+                  </tbody>
+              </table>
+              
+          </div>
+        </div>
+        <a href="{{ path('modifier_utilisateur') }}"  class="btn btn-primary shadow-sm mb-2">Modifier mes informations</a>
+        <a href="{{path('commande_utilisateur')}}"  class="btn btn-info shadow-sm mb-2">Mes commandes</a>
+        <a href=""  class="btn btn-info shadow-sm mb-2">Mes recettes</a>
+      </div>
+
+
+    </div>
+</div>
+
+{% endblock %}
