@@ -3,7 +3,7 @@
 {% block title %}Mon compte{% endblock %}
 
 {% block body %}
-<h1>Mon compte</h1>
+<h1  class="h3 mt-2 mb-2 font-weight" style="font-size: 4em">Mon compte</h1>
 
 
 
@@ -12,12 +12,12 @@
     <div class="row tableaudebord ">
 
 
-      <div class="col-md-10 mx-auto ">
+      <div class="col-md-6 mx-auto ">
         <div class="card shadow mb-4 bg-trans">
  
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          {# <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Mon compte</h6>
-          </div>
+          </div> #}
       
           <div class="card-body">
 
@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-            
+
                  {% for commande in liste_commande.commandes %}
                     <tr>
                         <td> {{ commande.id }} </td>
@@ -51,8 +51,10 @@
               
           </div>
         </div>
-        <a href="{{path('fiche_utilisateur')}}"  class="btn btn-info shadow-sm mb-2">Retour</a>
-      
+        <div class="text-center">
+          <a href="{{path('fiche_utilisateur')}}"  class="btn btn-info shadow-sm mb-2">Retour</a>
+        </div>
+
       </div>
 
 
