@@ -22,10 +22,10 @@ class BackofficeController extends AbstractController
         )
     {
         $liste_membre = $membre->findAll();
-        $liste_commande = $com->findDerniereCommande();
+        $liste_commande = $com->findBy([], ['id' => 'DESC'],7);
         $chiffreAffaire = $com->chiffreAffaire();
         $recette = $rec->findAll();
-        $commentaire = $comment->findBy([], ['id' => 'DESC']);
+        $commentaire = $comment->findBy([], ['id' => 'DESC'],5);
     
 
 

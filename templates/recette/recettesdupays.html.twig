@@ -58,7 +58,7 @@
 
 						<h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
 						<p class="card-text text-dark">{{recette.description}}</p>
-						<a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2">Voir la recette</a>
+						<a href="{{ path('fiche_recette', {"id":recette.id}) }}" class="btn btn-info mb-2">Voir la recette</a>
 
 					</div>
 				</div>
@@ -81,8 +81,8 @@
 					<div class="col-8">
 
 						<h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
-						<p class="card-text text-dark">{{recette.description}}</p>
-						<a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2">Voir la recette</a>
+						<p class="card-text text-dark">{{ recette.description }}</p>
+						<a href="{{ path('fiche_recette', {"id":recette.id}) }}" class="btn btn-info mb-2">Voir la recette</a>
 
 					</div>
 				</div>
