@@ -19,5 +19,12 @@
   "build/images/1.png": "/build/images/1.ade2f929.png",
   "build/images/fa-brands-400.svg": "/build/images/fa-brands-400.3c45c98f.svg",
   "build/images/fa-regular-400.svg": "/build/images/fa-regular-400.ab47faea.svg",
+<<<<<<< HEAD
   "build/images/fa-solid-900.svg": "/build/images/fa-solid-900.18df003f.svg"
+=======
+  "build/images/fa-solid-900.svg": "/build/images/fa-solid-900.18df003f.svg",
+  "build/vendors~app.css": "/build/vendors~app.css",
+  "build/images/1.png": "/build/images/1.ade2f929.png",
+  "build/images/2.png": "/build/images/2.26a4b21c.png"
+>>>>>>> b9f592858e803393307afec29f30fe48bceffeb1
 }

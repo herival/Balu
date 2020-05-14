@@ -75,7 +75,7 @@
 
 				<div class="row bg-trans rounded-lg mt-2 mb-2">
 					<div class="col-3">
-						<img class="card-img-top" src="{{ asset("img/" ~ recette.image )}}" alt="Card image cap">
+						<img class="card-img-top rounded" src="{{ asset("img/" ~ recette.image )}}" alt="Card image cap">
 					</div>
 
 					<div class="col-8">
@@ -89,10 +89,10 @@
 			{% endfor %}
 
 		</div>
-
-		<pre>
+	</div>
+{#		<pre>
 	{{ dump(liste_recettes_1,liste_recettes_2,liste_recettes_3) }}
-</pre>
+</pre> #}
 
 	{% endblock %}
 

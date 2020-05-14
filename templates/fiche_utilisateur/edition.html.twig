@@ -3,7 +3,7 @@
 {% block title %}Mon compte{% endblock %}
 
 {% block body %}
-<h1>Modifier les informations</h1>
+<h1 class="h3 mt-2 mb-2 font-weight" style="font-size: 4em">Modifier les informations</h1>
 
 
 
@@ -15,9 +15,9 @@
       <div class="col-md-6 mx-auto ">
         <div class="card shadow mb-4 bg-trans">
  
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          {# <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Mon compte</h6>
-          </div>
+          </div> #}
       
           <div class="card-body text-dark">
 
@@ -32,8 +32,11 @@
                     <div class="col-md-4">{{form_row(formMembre.cp)}}</div>
                     <div class="col-md-8">{{form_row(formMembre.ville)}}</div>
                 </div>
-                <button type="submit" class="btn btn-primary shadow">Modifier</button>
-                <a href="{{path('fiche_utilisateur')}}" class="btn btn-secondary shadow">Annuler</a>
+
+                <div class="text-center mt-4">
+                  <button type="submit" class="btn btn-primary shadow">Modifier</button>
+                  <a href="{{path('fiche_utilisateur')}}" class="btn btn-danger shadow">Annuler</a>
+                </div>
             {{form_end(formMembre)}}
               
           </div>
