@@ -65,9 +65,9 @@ class SouscategorieController extends AbstractController
             $em->remove($souscategorie_supprimer);
             $em->flush();
     
-            $this->addFlash('success', "La sous categorie \"$nomcategorie\"  a bien été supprimé!");
+            $this->addFlash('success', "La sous-categorie \"$nomcategorie\"  a bien été supprimée!");
         } else {
-            $this->addFlash('danger', "La sous catégorie \"$nomcategorie\"  ne peut pas être supprimé, elle est afféctée à une ou plusieurs recettes");
+            $this->addFlash('danger', "La sous-catégorie \"$nomcategorie\"  ne peut pas être supprimer, elle est afféctée à une ou plusieurs recettes");
 
         }
 
@@ -87,7 +87,7 @@ class SouscategorieController extends AbstractController
         if($formSousCategorie->isSubmitted() && $formSousCategorie->isValid()){
            
             $em->flush();
-            $this->addFlash("success", "La sous catégorie à bien été modifié");
+            $this->addFlash("success", "La sous-catégorie à bien été modifiée");
             return $this->redirectToRoute("souscategorie");
         }
         return $this->render("souscategorie/ajouter.html.twig", [ 
