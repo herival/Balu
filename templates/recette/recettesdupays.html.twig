@@ -90,17 +90,17 @@
 
 		</div>
 	</div>
-{#		<pre>
-	{{ dump(liste_recettes_1,liste_recettes_2,liste_recettes_3) }}
-</pre> #}
+	{#		<pre>
+			{{ dump(liste_recettes_1,liste_recettes_2,liste_recettes_3) }}
+		</pre> #}
 
-	{% endblock %}
+{% endblock %}
 
 
-	{% block javascripts %}
-		+
-		{{ parent() }}
-		+
-		{{ encore_entry_script_tags('app') }}
-		+
-	{% endblock %}
+{% block javascripts %}
+
+	{{ parent() }}
+
+	{{ encore_entry_script_tags('app') }}
+
+{% endblock %}
