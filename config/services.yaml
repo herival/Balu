@@ -24,6 +24,11 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+doctrine:
+     orm:
+         dql:
+             numeric_functions:
+                 rand: DoctrineExtensions\Query\Mysql\Rand
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

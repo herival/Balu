@@ -46,6 +46,22 @@ class RecetteRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return Recette[] Returns an array of Recette objects
+     */
+
+    public function findByCategorieLimit($value)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.categorie = :val')
+            ->setParameter('val', $value)
+            ->setMaxResults(3)
+            ->orderBy('RAND()')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function PaysFindBySousCategorie($categorie, $souscategorie)
     {
         return $this->createQueryBuilder('r')
