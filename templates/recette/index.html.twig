@@ -11,15 +11,18 @@
         
     <div class="row bg-trans rounded-lg mt-2 mb-2">
         <div class="col-3">
-            <img class="card-img-top" src="{{ asset("img/" ~ recette.image )}}" alt="Card image cap">
+            <div style="width:100%; height:20vh; overflow:hidden">
+                <img src="{{ asset("img/" ~ recette.image )}}" style="width:100%; margin: 0 0;"/>
+            </div>
         </div>
         
-        <div class="col-8">
+        <div class="col-lg-8">
+           
+                <h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
+                <p class="card-text text-dark">{{recette.description}}</p>
             
-            <h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
-            <p class="card-text text-dark">{{recette.description}}</p>
-            <a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2">Voir la recette</a>
-            
+                <a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2 my-0">Voir la recette</a>
+        
         </div>
     </div>
     

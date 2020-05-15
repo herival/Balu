@@ -4,6 +4,9 @@
 {% endblock %}
 
 {% block body %}
+<style>
+	span{font-family: inherit!important; color: inherit;}
+</style>
 <div class="container bg-trans">
 	<h1>Fiche recette</h1>
 	{% set urls = asset("img/")  %}
@@ -15,9 +18,18 @@
 	</div>
 
 
-	<p class="bg-light p-2"> {{ recette.description }}</p>
+	<p class="bg-light p-2 h3"> {{ recette.description }}</p>
 
-	<h3 class="alert text-dark">Publié par {{ recette.membre.Pseudo |capitalize}}</h3>
+	<div class="row d-flex justify-content-between">
+		<h3 class="alert text-dark col-md-4">Publié par {{ recette.membre.Pseudo |capitalize}}</h3>
+		<div class="col-md-6 d-flex justify-content-between align-items-center">
+
+		<span class="h4"><i class="fas fa-hot-tub"></i>  {{recette.tpspreparation|date("H:i")}}min</span>
+		<span class="h4"><i class="far fa-clock"></i>  {{recette.cuisson|date("H:i")}}min</span>
+		<span class="h4"><i class="fas fa-brain"></i>  {{recette.difficulte}}</span>
+		</div>
+		
+	</div>
 
 
 
@@ -94,7 +106,40 @@
 
 
 
-	</div>
+			<div class="ligne-blanche"></div>
+		</div>
+			<h2 class="text-dark mt-3">Voir aussi</h1>
+
+			<div class="py-4">
+			
+				<div class="row">
+					{% for recette in recette_proposee %}
+						
+					<div class="col-md-4 p-3">
+					<div class="card box-shadow">
+
+
+						<div style="width:100%; height:20vh; overflow:hidden">
+							<img src="{{asset('img/' ~ recette.image )}}" style="width:100%; margin: 0 0;"/>
+						</div>
+
+
+					
+						<div class="card-body">
+						<h5>{{ recette.titre }}</h5>
+						<p class="card-text">{{ recette.description|slice(0, 70) }}...</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+							<a href="{{path('fiche_recette', {"id":recette.id})}}" class="btn btn-sm btn-outline-info">Voir la recette</a>
+							</div> <small class="text-muted">{{recette.difficulte}}</small>
+						</div>
+						</div>
+					</div>
+					</div>
+
+					{% endfor %}
+		</div>
+
 
 </div>
 

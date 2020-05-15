@@ -37,12 +37,13 @@ class RecetteController extends AbstractController
     /**
      * @Route("/recette/pays/{idPays}", name="recettesdupays")
      */
-    public function recettes_par_pays($idPays, RecetteRepository $RR)
+    public function recettes_par_pays($idPays, RecetteRepository $RR, CategorieRepository $cat)
     { 
         $liste_recettes_1 = $RR->PaysFindBySousCategorie($idPays,1);
         $liste_recettes_2 = $RR->PaysFindBySousCategorie($idPays,2);
         $liste_recettes_3= $RR->PaysFindBySousCategorie($idPays,3);
-        //dd($liste_recettes);
+        $nom_categorie = $cat->find($idPays)->getCategorie();
+        // dd($nom_categorie);
 
 
 
@@ -50,7 +51,8 @@ class RecetteController extends AbstractController
         return $this->render('recette/recettesdupays.html.twig', [
             'liste_recettes_1' => $liste_recettes_1,
             'liste_recettes_2' => $liste_recettes_2,
-            'liste_recettes_3' => $liste_recettes_3
+            'liste_recettes_3' => $liste_recettes_3,
+            'nom_categorie'=>$nom_categorie
         ]);
     }
 
@@ -59,20 +61,22 @@ class RecetteController extends AbstractController
      */
     public function fiche_recette($id, RecetteRepository $ar, CommentaireRepository $comment)
     { 
-        
         if($this->getUser()){
             $commentaire_membre = $comment->findByMembre($this->getUser()->getId(), $id);
         } else {
             $commentaire_membre = array();
-
         }
-
+        
         $recette = $ar->find($id);
 
+        $categorie_id = $recette->getCategorie()->getId();
+        // dd($categorie_id);
+        $recette_proposee = $ar->findByCategorieLimit($categorie_id);
 
         return $this->render('recette/ficherecette.html.twig', [
             'recette' => $recette,
-            'commentaire_membre'=> $commentaire_membre
+            'commentaire_membre'=> $commentaire_membre,
+            'recette_proposee'=> $recette_proposee
         ]);
     }
     
