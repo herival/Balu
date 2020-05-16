@@ -22,8 +22,24 @@ body {
 a.navbar-brand {
     font-family: 'Lobster', cursive;
     font-size: x-large;
-    // color: rgb(64, 64, 92);
+    color: rgb(64, 64, 92);
 }
+
+a.dropdown-item {
+  background-color: whitesmoke;
+  color: rgb(64, 64, 92);
+  padding: 10px;
+}
+
+div.dropdown-menu.show {
+  background-color: whitesmoke;
+}
+
+div.dropdown-menu.show a:hover {
+  
+  color: rgb(64, 64, 92);
+}
+
 
 .bg-trans{
     background-color:rgba(253, 253, 253, 0.479)!important;
@@ -76,7 +92,7 @@ h1, h2 {
   }
 
   section {
-    min-height: 775px; 
+    min-height: 398px; 
     max-width:1000px;
   }
   
@@ -84,7 +100,8 @@ h1, h2 {
 
 footer {
     background-color: rgba(245, 218, 99, 0.788);
-    min-height: 20vh; 
+    min-height: 50px; 
+    padding: 5px;
 }
 
 footer .fin {
@@ -106,7 +123,6 @@ footer .fin a:hover {
 }
 
 footer p {
-  background-color:rgba(245, 218, 99, 0.788);
   color: rgb(64, 64, 92);
   height: 50px;
   padding: 10px;

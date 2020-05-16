@@ -1,6 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: rgba(245, 218, 99, 0.788); color: white;">
-  <a class="navbar-brand"  href="{{path('accueil')}}">BALU !</a>
+  
+  <a class="navbar-brand"  href="{{ path('accueil') }}"><img src="{{ asset ("img/logo2.png") }}"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -13,7 +14,7 @@
           </li> #}
 
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: rgb(64, 64, 92);">
           Catégories 
         </a>
 
@@ -69,13 +70,13 @@
   
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-              <a class="nav-link" href="{{path('fiche_utilisateur')}}"><i class="fa fa-user"></i>   Mon compte</a>
+              <a class="nav-link"  href="{{path('fiche_utilisateur')}}"><i class="fa fa-user"></i>   Mon compte</a>
 
-              <a class="nav-link" href="{{ path('app_logout')}}"><i class="fas fa-sign-out-alt"></i>  Deconnexion</a>
+              <a class="nav-link"  href="{{ path('app_logout')}}"><i class="fas fa-sign-out-alt"></i>  Deconnexion</a>
               
               {% if is_granted("ROLE_ADMIN") %}
              
-              <a class="nav-link" href="{{ path ("backoffice") }}"><i class="fa fa-cog"></i>   BackOffice</a>
+              <a class="nav-link"   href="{{ path ("backoffice") }}"><i class="fa fa-cog"></i>   BackOffice</a>
           
               {% endif %}
   
