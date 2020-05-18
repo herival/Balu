@@ -6,6 +6,7 @@
         {% block stylesheets %}
         {{ encore_entry_link_tags("app") }}
         {% endblock %}
+        <link rel="icon" type="image/png" href="img/logo2.png">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
     <body>
@@ -19,25 +20,27 @@
             {% block body %}
                 
             {% endblock %}
+
+            <section></section>
+
         </div>
-   
-        
-        <footer style="height: 50px">
+          
+        <footer>
             <div class="fin">     
-                    <div><a href="{{path('cgv')}}">Conditions générales de vente</a></div>
-                    <div><a href="{{path('cgu')}}">CGU</a></div>
-                    <div><a href="{{path('mentionslegales')}}">Mentions légales</a></div>
-                    <div><a href="{{path('contact')}}">Contact</a></div>
+                    <div><a href="{{ path('cgv') }}">Conditions générales de vente</a></div>
+                    <div><a href="{{ path('cgu') }}">CGU</a></div>
+                    <div><a href="{{ path('mentionslegales') }}">Mentions légales</a></div>
+                    <div><a href="{{ path('contact') }}">Contact</a></div>
             </div>
             <div class="text-center">
                 <span>Retrouvez Balu ! sur les réseaux sociaux</span>
             </div>      
             <div class="icons">
                 <div><a href="https://www.facebook.com"><i class="fab fa-facebook"></a></i></div>
-                <div><a href=""><i class="fab fa-twitter"></a></i></div>
-                <div><a href=""><i class="fab fa-instagram"></a></i></div>
+                <div><a href="https://twitter.com/home"><i class="fab fa-twitter"></a></i></div>
+                <div><a href="https://www.instagram.com/"><i class="fab fa-instagram"></a></i></div>
             </div>
-            <p class="text-center"> &copy; Copyright - Balu! - Mai 2020 </p>
+            <p class="text-center"> &copy;Copyright - Balu! - Mai 2020 </p>
         </footer>
 
         {% block javascripts %}

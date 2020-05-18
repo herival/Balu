@@ -22,11 +22,10 @@
 				{% for categorie in categorie %}
 
 					<div class="col-md-4 p-3">
-						<div class="card box-shadow">
+						<div class="card box-shadow" style="border: 3.5px solid rgb(64, 64, 92);">
 
-
-							<a href="{{path('recettesdupays',{"idPays":categorie.id})}}">
-								<div style="width:100%; height:20vh;  overflow:hidden">
+							<a href="{{ path('recettesdupays',{"idPays":categorie.id}) }}">
+								<div style="width: 100%; height: 20vh;  overflow:hidden">
 									<img src="{{ asset("img/" ~ categorie.image) }}" style="width:100%; margin: 0 0; height:inherit;"/>
 								</div>
 								<button type="button" class="btn btn-light centered">{{ categorie.categorie }}</button>
@@ -34,7 +33,6 @@
 
 						</div>
 					</div>
-
 
 				{% endfor %}
 
