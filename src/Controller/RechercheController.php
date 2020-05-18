@@ -15,6 +15,7 @@ class RechercheController extends AbstractController
     public function recherche_recette(RecetteRepository $rec, Request $request)
     {
         $motRecherche = $request->query->get("mot");
+        // dd($motRecherche);
         $motRecherche = trim($motRecherche); 
         $derniere_recette = $rec->findBy([], ["id"=>"DESC"], 3);
      
