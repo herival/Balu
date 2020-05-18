@@ -40,3 +40,10 @@ $(document).ready(function () {
     $(".toggleDisplay-3").toggleClass("active");
   });
 });
+
+$(function(){
+  $("[type='file']").change(function() {
+      var nomFichier = $(this).val();
+      $(this).next(".custom-file-label").html(nomFichier);
+  })
+});

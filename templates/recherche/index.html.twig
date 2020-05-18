@@ -48,8 +48,8 @@
 
                 
                     <div class="card-body">
-                    <h5>{{ recette.titre }}</h5>
-                      <p class="card-text">{{ recette.description|slice(0, 70) }}...</p>
+                    <h5>{{ recette.titre|slice(0, 30) }}</h5>
+                      <p class="card-text">{{ recette.description|slice(0, 65) }}...</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                           <a href="{{path('fiche_recette', {"id":recette.id})}}" class="btn btn-sm btn-outline-info">Voir la recette</a>

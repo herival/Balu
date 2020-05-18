@@ -314,7 +314,7 @@ class RecetteController extends AbstractController
             $em->flush();
             $this->addFlash('danger', "La recette  \"$nomrecette\"  a bien été supprimé!");
         } else {
-            $this->addFlash('danger', "Cette recette ne peux pas être supprimé car il y a un ou des commandes en cours");
+            $this->addFlash('danger', "Cette recette ne peux pas être supprimé car il y a une ou des commandes en cours");
         }
 
 

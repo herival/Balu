@@ -16,12 +16,17 @@
             </div>
         </div>
         
-        <div class="col-lg-8">
+        <div class="col-lg-8 conteneur-pack">
            
                 <h5 class="card-title mt-2 ">{{ recette.titre }}</h5>
                 <p class="card-text text-dark">{{recette.description}}</p>
-            
+                {% if recette.vente == true %}
+                <div class="">
+                    <p class="en-vente font-weight-bold">Pack Ingredients : <span class="bagde badge-warning rounded"> {{ recette.prix }} € </span></p>
+                </div>
+                {% endif %}
                 <a href="{{ path('fiche_recette', {"id":recette.id})}}" class="btn btn-info mb-2 my-0">Voir la recette</a>
+
         
         </div>
     </div>

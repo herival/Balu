@@ -6,7 +6,9 @@ namespace App\Controller;
 use App\Form\MembreType;
 use App\Form\RegistrationFormType;
 use App\Repository\MembreRepository;
+use App\Repository\RecetteRepository;
 use App\Repository\CommandeRepository;
+use App\Repository\CommentaireRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface as EntityManager;
@@ -69,20 +71,32 @@ class MembreController extends AbstractController
     /**
      * @Route("/admin/membre/supprimer/{id}", name="supprimer_membre")
      */
-    public function supprimer(CommandeRepository $com, EntityManager $em, Request $request, $id, MembreRepository $membre)
+    public function supprimer(
+        CommentaireRepository $comment,
+        RecetteRepository $rec, 
+        CommandeRepository $com, 
+        EntityManager $em, 
+        Request $request, $id, 
+        MembreRepository $membre)
     {
 
         $membre = $membre->find($id);
         $pseudo = $membre->getPseudo();
         $commande = $com->findByMembre($id);
-        if(!$commande){
+        $recette = $rec->findByMembre($id);
+        $commentaire = $comment->findByMembreId($id); 
+        if(!$commande && !$recette && !$commentaire){
             $em = $this->getDoctrine()->getManager();
             $em->remove($membre);
             $em->flush();
     
             $this->addFlash('success', "L'utilisateur  \"$pseudo\"  a bien été supprimé!");
-        } else {
-            $this->addFlash('danger', "Le membre  \"$pseudo\" ne peut pas être supprimé car il a un ou des commande(s) en cours");
+        } else if($commande){
+            $this->addFlash('danger', "Le membre  \"$pseudo\" ne peut pas être supprimé car il a une ou des commande(s) en cours");
+        }  else if($commentaire){
+            $this->addFlash('danger', "Le membre  \"$pseudo\" ne peut pas être supprimé car il a laissé des commentaires en ligne");
+        }  else {
+            $this->addFlash('danger', "Le membre  \"$pseudo\" ne peut pas être supprimé car il a une ou des recette(s) en ligne");
         }
         
 

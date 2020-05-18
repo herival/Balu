@@ -172,7 +172,7 @@
                 <tr>
                      
                         <td><a href=""> {{ commentaire.membre.pseudo }} </a></td>
-                        <td> {{ commentaire.recette.titre  }} </td>
+                        <td> {{ commentaire.recette.titre|slice(0, 15)}}... </td>
                         <td> {{ commentaire.commentaire|slice(0, 20) }}...</td>
                         <td class="{{ (commentaire.note > 5) ? 'bg-success' : 'bg-danger' }} text-white"> {{ commentaire.note }}/10 </td>
                 

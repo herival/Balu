@@ -10,10 +10,10 @@
     <div class="col-lg-8 mx-auto text-dark bg-trans rounded-lg ">
 	{{ form_start(formRecette) }}
         {{ form_row(formRecette.categorie) }}
-        {{ form_row(formRecette.souscategorie) }}
+        {{ form_row(formRecette.souscategorie, {'label':'Sous categorie'}) }}
         {{ form_row(formRecette.titre) }}
-        {{ form_row(formRecette.description) }}
-        {{ form_row(formRecette.image) }}
+        {{ form_row(formRecette.description, {'label': 'Description de la recette'}) }}
+        {{ form_row(formRecette.image, {'label': 'Ajouter une image'}) }}
 
         {{ form_row(formRecette.preparation) }}
        
@@ -35,7 +35,7 @@
         </div>
 
         <div class="text-center mt-3 mb-4">
-            <input type="submit" class="btn btn-lg btn-success" value="Enregistrer">
+            <input type="submit" class="btn btn-lg btn-success mb-2" value="Enregistrer">
         </div>    
     
     </div>

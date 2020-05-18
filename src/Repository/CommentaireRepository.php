@@ -34,6 +34,20 @@ class CommentaireRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Commentaire[] Returns an array of Commentaire objects
+     */
+    
+    public function findByMembreId($membre)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.membre = :membre')
+            ->setParameter('membre', $membre)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     public function findByNote_positif($value)
     {
         return $this->createQueryBuilder('c')

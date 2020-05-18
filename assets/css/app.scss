@@ -10,7 +10,13 @@ body {
 .none {
     color: rgba(255, 255, 255, 0.267);
 }
-
+.en-vente{
+  position: absolute;
+  right: 0px;
+}
+.conteneur-pack{
+  position: relative;
+}
 .erreur {
   font-size: 10em;
 }

@@ -55,8 +55,8 @@
                  {% for commentaire in commentaire %}
                     <tr>
                         <td> {{ commentaire.id }} </td>
-                        <td><a href=""> {{ commentaire.membre.pseudo }} </a></td>
-                        <td> {{ commentaire.recette.titre }} </td>
+                        <td> {{ commentaire.membre.pseudo }} </td>
+                        <td> {{ commentaire.recette.titre}} </td>
                         <td> {{ commentaire.commentaire }} </td>
                         <td class="{{ (commentaire.note > 5) ? 'bg-success' : 'bg-danger' }} text-white"> {{ commentaire.note }}/10 </td>
                 
